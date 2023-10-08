@@ -1,0 +1,25 @@
+# Introduction
+
+The Application of the Cox Proportional Hazard Model and Its Application and Effectiveness
+
+The Cox Proportional Hazard Model, also known as the Cox Regression or Cox PH model is an important statistical tool used in survival analysis. This model was developed in 1972 by a British statistician by the name of Sir David R. Cox to analyze time-to-event data. Survival analysis such as the Cox Regression is a time-to-event analysis, used to investigate the time until the occurrence of an event of interest. Applications of this regression model go far beyond statistical setting and are widely used in medical research and are growing in use in reliability engineering and other outcomes research. In this introduction, we will review Cox Regression, delve deeper into how the Cox Regression has been applied to three different medical research papers, note some of its uses outside of the medical field, and discuss how effective statistical analysis is.
+
+Prior to the publication of the Cox Proportional Hazard model, tests such as the log-rank test were used but limited to observing the effect of one variable at a time \[1\]. Additionally, the logrank test could not quantify the effect of the variables \[1\]. The Cox proportional hazards model estimates the hazard as \[1\]:
+
+```{=tex}
+h(t)=h_n(t) \exp \left(B_1 X_1+B_2 X_2+\ldots B_p X_p\right)
+```
+$h$ is the hazard at time $t$, $h_u(t)$ is the baseline hazard, $\mathrm{X}$ are the covariates.
+
+The Cox proportional hazard model assumes the hazard rate is a product of a baseline hazard rate, that that baseline hazard rate is the hazard rate when the covariates have no effect on the event. A regression vector is estimated by maximizing a marginal, partial, or maximum likelihood function. The significance of the covariates can be tested with analytical methods (log rank test, or chi-squared test) or graphical methods (cumulative hazard rate plots or residual plots). Insignificant covariates can be removed and a regression vector recalculated \[2\].
+
+Model Assumptions
+
+Dividing both sides by $h_0(t)$ yields the hazard ratio
+
+```{=tex}
+\mathrm{h}(\mathrm{t}) / \mathrm{h}_{\mathrm{o}}(\mathrm{t})=\exp \left(\mathrm{B}_1 \mathrm{X}_1+\mathrm{B}_2 \mathrm{X}_2+\ldots \mathrm{B}_{\mathrm{p}} \mathrm{X}_{\mathrm{p}}\right) \text {. }
+```
+This hazard ratio must remain constant over time to fit the assumptions of the Cox $\mathrm{PH}$ model. Babinska, et al. emphasize this in their paper looking at the Cox PH model's use in analyzing the outcomes of patients with acute coronary syndrome \[3\]. Cox proportional hazard model also assumes events are independent and that censoring is uninformative \[1\]. That is that the time to event for one person (or thing) is independent of the time to event for another person (or thing) and people (or things) who do not continue to the end of the study, aka. are censored, have the same risk of the event as those that do continue until the end of the study period.
+
+Reasons the Cox proportional hazards model is popular is that it does not require the baseline hazard, $h_0(t)$ to be known \[1\].
