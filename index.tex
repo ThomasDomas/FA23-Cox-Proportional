@@ -41,7 +41,7 @@
 \makeatother
 \usepackage{xcolor}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -117,35 +117,11 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
 \makeatother
 \makeatletter
-\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -203,8 +179,6 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={FA23-Cox Proportional},
-  pdfauthor={Norah Jones},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -212,27 +186,15 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{FA23-Cox Proportional}
-\author{Norah Jones}
-\date{2023-10-08}
+\author{}
+\date{}
 
 \begin{document}
-\maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, frame hidden, interior hidden, enhanced, sharp corners, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
-
-\renewcommand*\contentsname{Table of contents}
-{
-\hypersetup{linkcolor=}
-\setcounter{tocdepth}{2}
-\tableofcontents
-}
-\bookmarksetup{startatroot}
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, enhanced, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{preface}{%
 \chapter*{Preface}\label{preface}}
 \addcontentsline{toc}{chapter}{Preface}
-
-\markboth{Preface}{Preface}
 
 This is a Quarto book.
 
@@ -248,120 +210,6 @@ To learn more about Quarto books visit
 \begin{verbatim}
 [1] 2
 \end{verbatim}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{introduction}{%
-\chapter{Introduction}\label{introduction}}
-
-The Application of the Cox Proportional Hazard Model and Its Application
-and Effectiveness
-
-The Cox Proportional Hazard Model, also known as the Cox Regression or
-Cox PH model is an important statistical tool used in survival analysis.
-This model was developed in 1972 by a British statistician by the name
-of Sir David R. Cox to analyze time-to-event data. Survival analysis
-such as the Cox Regression is a time-to-event analysis, used to
-investigate the time until the occurrence of an event of interest.
-Applications of this regression model go far beyond statistical setting
-and are widely used in medical research and are growing in use in
-reliability engineering and other outcomes research. In this
-introduction, we will review Cox Regression, delve deeper into how the
-Cox Regression has been applied to three different medical research
-papers, note some of its uses outside of the medical field, and discuss
-how effective statistical analysis is.
-
-Prior to the publication of the Cox Proportional Hazard model, tests
-such as the log-rank test were used but limited to observing the effect
-of one variable at a time {[}1{]}. Additionally, the logrank test could
-not quantify the effect of the variables {[}1{]}. The Cox proportional
-hazards model estimates the hazard as {[}1{]}:
-
-\texh(t)=h\_n(t) \textbackslash exp \textbackslash left(B\_1 X\_1+B\_2
-X\_2+\textbackslash ldots B\_p X\_p\textbackslash right)
-
-\$h\$ is the hazard at time \$t\$, \$h\_u(t)\$ is the baseline hazard,
-\$\textbackslash mathrm\{X\}\$ are the covariates.
-
-The Cox proportional hazard model assumes the hazard rate is a product
-of a baseline hazard rate, that that baseline hazard rate is the hazard
-rate when the covariates have no effect on the event. A regression
-vector is estimated by maximizing a marginal, partial, or maximum
-likelihood function. The significance of the covariates can be tested
-with analytical methods (log rank test, or chi-squared test) or
-graphical methods (cumulative hazard rate plots or residual plots).
-Insignificant covariates can be removed and a regression vector
-recalculated {[}2{]}.
-
-Model Assumptions
-
-Dividing both sides by \$h\_0(t)\$ yields the hazard ratio
-
-\$\$
-
-\textbackslash mathrm\{h\}(\textbackslash mathrm\{t\}) /
-\textbackslash mathrm\{h\}\_\{\textbackslash mathrm\{o\}\}(\textbackslash mathrm\{t\})=\textbackslash exp
-\textbackslash left(\textbackslash mathrm\{B\}\_1
-\textbackslash mathrm\{X\}\_1+\textbackslash mathrm\{B\}\_2
-\textbackslash mathrm\{X\}\_2+\textbackslash ldots
-\textbackslash mathrm\{B\}\_\{\textbackslash mathrm\{p\}\}
-\textbackslash mathrm\{X\}\_\{\textbackslash mathrm\{p\}\}\textbackslash right)
-\textbackslash text \{. \}
-
-\$\$
-
-This hazard ratio must remain constant over time to fit the assumptions
-of the Cox \$\textbackslash mathrm\{PH\}\$ model. Babinska, et
-al.~emphasize this in their paper looking at the Cox PH model's use in
-analyzing the outcomes of patients with acute coronary syndrome {[}3{]}.
-Cox proportional hazard model also assumes events are independent and
-that censoring is uninformative {[}1{]}. That is that the time to event
-for one person (or thing) is independent of the time to event for
-another person (or thing) and people (or things) who do not continue to
-the end of the study, aka. are censored, have the same risk of the event
-as those that do continue until the end of the study period.
-
-Reasons the Cox proportional hazards model is popular is that it does
-not require the baseline hazard, \$h\_0(t)\$, to be known {[}1{]}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 2
-\end{verbatim}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{summary}{%
-\chapter{Summary}\label{summary}}
-
-In summary, this book has no content whatsoever.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 2
-\end{verbatim}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{references}{%
-\chapter*{References}\label{references}}
-\addcontentsline{toc}{chapter}{References}
-
-\markboth{References}{References}
-
-\hypertarget{refs}{}
-\begin{CSLReferences}{0}{0}
-\end{CSLReferences}
 
 
 
