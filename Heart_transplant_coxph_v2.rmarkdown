@@ -1,0 +1,217 @@
+---
+title: "Heart_transplant_coxph_v2"
+format: html
+editor: visual
+---
+
+
+## Load libraries and data set, examine and transform data as needed.
+
+Load the needed libraries (survivival, survminer) and import the heart transplant dataset
+
+
+```{r}
+#| output: false
+#load neaded libraries
+library(survival)
+#install.packages("survminer")
+library(survminer)
+
+#import dataset
+heart_transplant <- read.csv("./heart_transplant.csv")
+```
+
+
+Examine the data
+
+
+```{r}
+#examine dataset
+str(heart_transplant)
+summary(heart_transplant)
+```
+
+
+For the variables of survived (whether the patient is still alive at end of study), prior (whether the patient has had a prior surgery), and transplant (whether the patient received a heart transplant or did not) generate numeric values from the character values.
+
+
+```{r}
+#| output: false
+#generate numeric columns for survived, prior, and transplant from existing charachter columns
+heart_transplant$survived2 <- as.numeric(ifelse(heart_transplant$survived=="dead",1,0))
+heart_transplant$prior2 <- as.numeric(ifelse(heart_transplant$prior=="yes",1,0))
+heart_transplant$transplant2 <- as.numeric(ifelse(heart_transplant$transplant=="treatment",1,0))
+
+#attach dataset so can reference variables by name
+attach(heart_transplant)
+```
+
+
+Examine variables
+
+-   Age: age of the patient at the beginning of the study
+
+-   Acceptyear: year of acceptance as a heart transplant candidate
+
+-   Survtime: number of days patients were alive after the date they were determined to be a candidate for a heart transplant until the termination of the study
+
+-   Wait: waiting time for transplant
+
+-   Survived2: survival status with levels of 0-dead and 1-alive
+
+-   Prior2: whether or not the patient has had prior surgery with levels of 0-no and 1-yes
+
+-   Transplant2: transplant status with levels of 0-control-did not receive transplant and 1-treatment-did receive transplant
+
+
+```{r}
+#examine variables more
+par(mfrow=c(2,2))
+hist(age, xlab="Age (years)")
+hist(acceptyear, xlab="Year 19XX")
+hist(survtime, xlab="Survivial time (days)")
+hist(wait, xlab="Waittime for transplant (days)")
+hist(survived2, xlab="Survival Status (0-dead 1-alive)")
+hist(prior2, xlab="Prior Surgery (0-no 1-yes)")
+hist(transplant2, xlab="Transplant Status (0-control-no 1-transplant)")
+par(mfrow=c(1,1))
+```
+
+
+## Generate Cox proporitonal hazards model(s).
+
+Set the Wait (waiting time for transplant) variable aside for now, as it is only valid for those who received the transplant not those in the control group. Generate and examine a Cox proportional hazards model using coxph
+
+
+```{r}
+#generate model without wait time
+#wait time is only available for those who received transplant not the control group
+all.mod <- coxph(Surv(survtime, survived2)~ acceptyear + age + prior2 + transplant2)
+
+#examine model
+summary(all.mod)
+```
+
+
+Generate another model, for those who do receive the transplant, to determine if Wait (waiting time for transplant) was a significant indicator of patients survival status.
+
+
+```{r}
+#generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant
+treated.mod <- coxph(Surv(survtime, survived2)~ acceptyear + age + prior2 + wait)
+
+#examine model
+summary(treated.mod)
+```
+
+
+Returning to looking at the all the patients in the study, accepted year does not appear to contribute significantly to the models. A model without that variable was generated.
+
+
+```{r}
+#generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model
+all2.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + transplant2)
+summary(all2.mod)
+```
+
+
+Models with and without the variable for Accepted Year were compared
+
+A high p value here indicates there is not a statistically significant difference between the two models. Thus the variable acceptedyear can be dropped from the model without significantly affecting it.
+
+
+```{r}
+anova(all.mod, all2.mod, test="LRT")
+```
+
+
+## Check data meets Cox proportional hazards model assumptions.
+
+#### Check linearity assumption is met by examining a plot of the Martingale residuals.
+
+The relationship between the x variables and the log hazard should be linear. Similar to checking for linearity in other models, a residual plot is examined. A smooth line is added to the graph to aid in assessing how well the points center around zero.
+
+
+```{r}
+plot(predict(all2.mod), residuals(all2.mod, type="martingale"), xlab = "Predicted Values", ylab = "Martingale Residuals", main = "All2 Residual Plot",las=1)
+lines(smooth.spline(predict(all2.mod), residuals(all2.mod, type = "martingale")),col="red")
+```
+
+
+#### Check proportional hazards assumption.
+
+Use the Schoenfield test. (cox.zph) H0 = hazards are proportional. A high p value (\>0.05) here and we fail to reject the null hypothesis. A table shows the test results for each variable and the overall model.
+
+The test can also be plotted. If the hazard ratio changes over time (is not proportional) what would its change look like. That is what the plot shows. To confirm hazards are proportional one wants to see that Beta=0 falls within the confidence interval. Three plots show how each variable fairs at meeting the proportional hazards assumption. Looking at the plot for Transplant2, the line for Beta=0 almost never falls in the confidence interval. This indicates Tranplant2 does not meet the proportional hazard assumption. This is consistent with the p value \<0.05 that is see in the table.
+
+
+```{r}
+cox.zph(all2.mod)
+par(mfrow=c(1,3))
+plot(cox.zph(all2.mod)[1])
+abline(h=0, col=2)
+plot(cox.zph(all2.mod)[2])
+abline(h=0, col=2)
+plot(cox.zph(all2.mod)[3])
+abline(h=0, col=2)
+par(mfrow=c(1,1))
+```
+
+
+Transplant status does not meet the proportional hazard assumption. Thus a Cox proportional hazards model, as we previously generated, can not be used. However, we can account for this development by stratifying the variable that does not meet the proportionality assumption. A new model is generated, or rather two models are generated, one for each status of the transplant variable (0-control-did not receive transplant and 1-treatment-did receive transplant).
+
+## Generate Cox proportional hazards models stratified on transplant status.
+
+Generate and examine transplant stratified models.
+
+
+```{r}
+all_strTrtmnt.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + strata(transplant2))
+summary(all_strTrtmnt.mod)
+```
+
+
+Check assumptions again for the latest model: linearity assumption and proportional hazards assumption.
+
+
+```{r}
+plot(predict(all_strTrtmnt.mod), residuals(all_strTrtmnt.mod, type="martingale"), xlab = "Fitted Values", ylab = "martingale Residuals", main = "All Stratified Transplant, Residual Plot",las=1)
+abline(h=0)
+lines(smooth.spline(predict(all2.mod), residuals(all2.mod, type = "martingale")),col="red")
+cox.zph(all_strTrtmnt.mod)
+plot(cox.zph(all_strTrtmnt.mod)[1])
+abline(h=0, col=2)
+plot(cox.zph(all_strTrtmnt.mod)[2])
+abline(h=0, col=2)
+```
+
+
+## Estimate survival curves.
+
+The advantage of the Cox PHM is that we do not need to know the baseline hazard. Not knowing the baseline hazard means we can not say the hazard for the studied group. We can only give the ratio of those two. Without the baseline hazard and the hazard of the studied group, survival curves can not be calculated. However using mean values of variables a survival curve can be estimated using ggsurvplot.
+
+
+```{r}
+ggsurvplot(survfit(all_strTrtmnt.mod), data=heart_transplant, ggtheme = theme_minimal(), conf.int=TRUE, risk.table=TRUE, tables.height = 0.3, tables.theme = theme_minimal())
+```
+
+
+## Additional analysis.
+
+Age has a strong effect in this model. For further analysis, age was categorized into \<40, 40-49, 50+. A model was generated for this age categorized variable.
+
+
+```{r}
+heart_transplant$age2 <- as.numeric(ifelse(heart_transplant$age<41,0,ifelse(heart_transplant$age<51,1,2)))
+detach(heart_transplant)
+attach(heart_transplant)
+hist(age2, xlab="Age (<40, 40-49, 50+)")
+
+#generate model with chategorized age
+all_agechat.mod <- coxph(Surv(survtime, survived2)~ age2 + prior2 + strata(transplant2))
+summary(all_agechat.mod)
+
+
+detach(heart_transplant)
+```
+
