@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Heart_transplant_coxph_v2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Heart_transplant_coxph_v2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="load-libraries-and-data-set-examine-and-transform-data-as-needed." class="level2">
+<h2 class="anchored" data-anchor-id="load-libraries-and-data-set-examine-and-transform-data-as-needed.">Load libraries and data set, examine and transform data as needed.</h2>
+<p>Load the needed libraries (survivival, survminer) and import the heart transplant dataset</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load neaded libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survminer")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import dataset</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>heart_transplant <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./heart_transplant.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Examine the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#examine dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   99 obs. of  8 variables:
+ $ id        : int  15 43 61 75 6 42 54 38 85 2 ...
+ $ acceptyear: int  68 70 71 72 68 70 71 70 73 68 ...
+ $ age       : int  53 43 52 52 54 36 47 41 47 51 ...
+ $ survived  : chr  "dead" "dead" "dead" "dead" ...
+ $ survtime  : int  1 2 2 2 3 3 3 5 5 6 ...
+ $ prior     : chr  "no" "no" "no" "no" ...
+ $ transplant: chr  "control" "control" "control" "control" ...
+ $ wait      : int  NA NA NA NA NA NA NA 5 NA NA ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id           acceptyear         age         survived        
+ Min.   :  1.00   Min.   :67.00   Min.   : 8.0   Length:99         
+ 1st Qu.: 26.50   1st Qu.:69.00   1st Qu.:40.5   Class :character  
+ Median : 51.00   Median :71.00   Median :47.0   Mode  :character  
+ Mean   : 52.26   Mean   :70.64   Mean   :44.6                     
+ 3rd Qu.: 78.50   3rd Qu.:72.00   3rd Qu.:52.0                     
+ Max.   :103.00   Max.   :74.00   Max.   :64.0                     
+                                                                   
+    survtime         prior            transplant             wait    
+ Min.   :   1.0   Length:99          Length:99          Min.   :  1  
+ 1st Qu.:  31.5   Class :character   Class :character   1st Qu.:  9  
+ Median :  85.0   Mode  :character   Mode  :character   Median : 26  
+ Mean   : 316.4                                         Mean   : 39  
+ 3rd Qu.: 436.0                                         3rd Qu.: 46  
+ Max.   :1799.0                                         Max.   :310  
+                                                        NA's   :32   </code></pre>
+</div>
+</div>
+<p>For the variables of survived (whether the patient is still alive at end of study), prior (whether the patient has had a prior surgery), and transplant (whether the patient received a heart transplant or did not) generate numeric values from the character values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate numeric columns for survived, prior, and transplant from existing charachter columns</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>survived2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>survived<span class="sc">==</span><span class="st">"dead"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>prior2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>prior<span class="sc">==</span><span class="st">"yes"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>transplant2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>transplant<span class="sc">==</span><span class="st">"treatment"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#attach dataset so can reference variables by name</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Examine variables</p>
+<ul>
+<li><p>Age: age of the patient at the beginning of the study</p></li>
+<li><p>Acceptyear: year of acceptance as a heart transplant candidate</p></li>
+<li><p>Survtime: number of days patients were alive after the date they were determined to be a candidate for a heart transplant until the termination of the study</p></li>
+<li><p>Wait: waiting time for transplant</p></li>
+<li><p>Survived2: survival status with levels of 0-dead and 1-alive</p></li>
+<li><p>Prior2: whether or not the patient has had prior surgery with levels of 0-no and 1-yes</p></li>
+<li><p>Transplant2: transplant status with levels of 0-control-did not receive transplant and 1-treatment-did receive transplant</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#examine variables more</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(age, <span class="at">xlab=</span><span class="st">"Age (years)"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(acceptyear, <span class="at">xlab=</span><span class="st">"Year 19XX"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(survtime, <span class="at">xlab=</span><span class="st">"Survivial time (days)"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wait, <span class="at">xlab=</span><span class="st">"Waittime for transplant (days)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(survived2, <span class="at">xlab=</span><span class="st">"Survival Status (0-dead 1-alive)"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(prior2, <span class="at">xlab=</span><span class="st">"Prior Surgery (0-no 1-yes)"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(transplant2, <span class="at">xlab=</span><span class="st">"Transplant Status (0-control-no 1-transplant)"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="generate-cox-proporitonal-hazards-models." class="level2">
+<h2 class="anchored" data-anchor-id="generate-cox-proporitonal-hazards-models.">Generate Cox proporitonal hazards model(s).</h2>
+<p>Set the Wait (waiting time for transplant) variable aside for now, as it is only valid for those who received the transplant not those in the control group. Generate and examine a Cox proportional hazards model using coxph</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without wait time</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#wait time is only available for those who received transplant not the control group</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>all.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> transplant2)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#examine model</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
+    prior2 + transplant2)
+
+  n= 99, number of events= 71 
+
+                coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+acceptyear  -0.08294   0.92040  0.06647 -1.248 0.212083    
+age          0.05553   1.05711  0.01432  3.878 0.000105 ***
+prior2      -0.63345   0.53076  0.44818 -1.413 0.157542    
+transplant2 -1.69836   0.18298  0.28791 -5.899 3.66e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+            exp(coef) exp(-coef) lower .95 upper .95
+acceptyear     0.9204      1.086    0.8080    1.0485
+age            1.0571      0.946    1.0278    1.0872
+prior2         0.5308      1.884    0.2205    1.2776
+transplant2    0.1830      5.465    0.1041    0.3217
+
+Concordance= 0.756  (se = 0.031 )
+Likelihood ratio test= 48.89  on 4 df,   p=6e-10
+Wald test            = 49.36  on 4 df,   p=5e-10
+Score (logrank) test = 55.91  on 4 df,   p=2e-11</code></pre>
+</div>
+</div>
+<p>Generate another model, for those who do receive the transplant, to determine if Wait (waiting time for transplant) was a significant indicator of patients survival status.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>treated.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> wait)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#examine model</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treated.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
+    prior2 + wait)
+
+  n= 67, number of events= 43 
+   (32 observations deleted due to missingness)
+
+                coef exp(coef)  se(coef)      z Pr(&gt;|z|)  
+acceptyear  0.005578  1.005594  0.095776  0.058   0.9536  
+age         0.050544  1.051843  0.021308  2.372   0.0177 *
+prior2     -0.751733  0.471549  0.453454 -1.658   0.0974 .
+wait       -0.008337  0.991697  0.005109 -1.632   0.1027  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+           exp(coef) exp(-coef) lower .95 upper .95
+acceptyear    1.0056     0.9944    0.8335     1.213
+age           1.0518     0.9507    1.0088     1.097
+prior2        0.4715     2.1207    0.1939     1.147
+wait          0.9917     1.0084    0.9818     1.002
+
+Concordance= 0.685  (se = 0.043 )
+Likelihood ratio test= 14.23  on 4 df,   p=0.007
+Wald test            = 12.64  on 4 df,   p=0.01
+Score (logrank) test = 13.19  on 4 df,   p=0.01</code></pre>
+</div>
+</div>
+<p>Returning to looking at the all the patients in the study, accepted year does not appear to contribute significantly to the models. A model without that variable was generated.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>all2.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> transplant2)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all2.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior2 + transplant2)
+
+  n= 99, number of events= 71 
+
+                coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+age          0.05647   1.05810  0.01457  3.875 0.000107 ***
+prior2      -0.70778   0.49274  0.44368 -1.595 0.110655    
+transplant2 -1.72587   0.17802  0.28398 -6.077 1.22e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+            exp(coef) exp(-coef) lower .95 upper .95
+age            1.0581     0.9451    1.0283    1.0888
+prior2         0.4927     2.0295    0.2065    1.1756
+transplant2    0.1780     5.6174    0.1020    0.3106
+
+Concordance= 0.746  (se = 0.031 )
+Likelihood ratio test= 47.31  on 3 df,   p=3e-10
+Wald test            = 48.37  on 3 df,   p=2e-10
+Score (logrank) test = 55.28  on 3 df,   p=6e-12</code></pre>
+</div>
+</div>
+<p>Models with and without the variable for Accepted Year were compared</p>
+<p>A high p value here indicates there is not a statistically significant difference between the two models. Thus the variable acceptedyear can be dropped from the model without significantly affecting it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(survtime, survived2)
+ Model 1: ~ acceptyear + age + prior2 + transplant2
+ Model 2: ~ age + prior2 + transplant2
+   loglik  Chisq Df Pr(&gt;|Chi|)
+1 -255.49                     
+2 -256.28 1.5784  1      0.209</code></pre>
+</div>
+</div>
+</section>
+<section id="check-data-meets-cox-proportional-hazards-model-assumptions." class="level2">
+<h2 class="anchored" data-anchor-id="check-data-meets-cox-proportional-hazards-model-assumptions.">Check data meets Cox proportional hazards model assumptions.</h2>
+<section id="check-linearity-assumption-is-met-by-examining-a-plot-of-the-martingale-residuals." class="level4">
+<h4 class="anchored" data-anchor-id="check-linearity-assumption-is-met-by-examining-a-plot-of-the-martingale-residuals.">Check linearity assumption is met by examining a plot of the Martingale residuals.</h4>
+<p>The relationship between the x variables and the log hazard should be linear. Similar to checking for linearity in other models, a residual plot is examined. A smooth line is added to the graph to aid in assessing how well the points center around zero.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type=</span><span class="st">"martingale"</span>), <span class="at">xlab =</span> <span class="st">"Predicted Values"</span>, <span class="at">ylab =</span> <span class="st">"Martingale Residuals"</span>, <span class="at">main =</span> <span class="st">"All2 Residual Plot"</span>,<span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">smooth.spline</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type =</span> <span class="st">"martingale"</span>)),<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="check-proportional-hazards-assumption." class="level4">
+<h4 class="anchored" data-anchor-id="check-proportional-hazards-assumption.">Check proportional hazards assumption.</h4>
+<p>Use the Schoenfield test. (cox.zph) H0 = hazards are proportional. A high p value (&gt;0.05) here and we fail to reject the null hypothesis. A table shows the test results for each variable and the overall model.</p>
+<p>The test can also be plotted. If the hazard ratio changes over time (is not proportional) what would its change look like. That is what the plot shows. To confirm hazards are proportional one wants to see that Beta=0 falls within the confidence interval. Three plots show how each variable fairs at meeting the proportional hazards assumption. Looking at the plot for Transplant2, the line for Beta=0 almost never falls in the confidence interval. This indicates Tranplant2 does not meet the proportional hazard assumption. This is consistent with the p value &lt;0.05 that is see in the table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(all2.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            chisq df      p
+age          3.03  1 0.0819
+prior2       4.46  1 0.0348
+transplant2  7.40  1 0.0065
+GLOBAL      10.32  3 0.0160</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all2.mod)[<span class="dv">1</span>])</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all2.mod)[<span class="dv">2</span>])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all2.mod)[<span class="dv">3</span>])</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Transplant status does not meet the proportional hazard assumption. Thus a Cox proportional hazards model, as we previously generated, can not be used. However, we can account for this development by stratifying the variable that does not meet the proportionality assumption. A new model is generated, or rather two models are generated, one for each status of the transplant variable (0-control-did not receive transplant and 1-treatment-did receive transplant).</p>
+</section>
+</section>
+<section id="generate-cox-proportional-hazards-models-stratified-on-transplant-status." class="level2">
+<h2 class="anchored" data-anchor-id="generate-cox-proportional-hazards-models-stratified-on-transplant-status.">Generate Cox proportional hazards models stratified on transplant status.</h2>
+<p>Generate and examine transplant stratified models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>all_strTrtmnt.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all_strTrtmnt.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior2 + strata(transplant2))
+
+  n= 99, number of events= 71 
+
+           coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+age     0.04662   1.04773  0.01434  3.250  0.00115 **
+prior2 -0.78988   0.45390  0.44480 -1.776  0.07576 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+       exp(coef) exp(-coef) lower .95 upper .95
+age       1.0477     0.9544    1.0187     1.078
+prior2    0.4539     2.2031    0.1898     1.085
+
+Concordance= 0.642  (se = 0.038 )
+Likelihood ratio test= 15.95  on 2 df,   p=3e-04
+Wald test            = 13.96  on 2 df,   p=9e-04
+Score (logrank) test = 14.36  on 2 df,   p=8e-04</code></pre>
+</div>
+</div>
+<p>Check assumptions again for the latest model: linearity assumption and proportional hazards assumption.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predict</span>(all_strTrtmnt.mod), <span class="fu">residuals</span>(all_strTrtmnt.mod, <span class="at">type=</span><span class="st">"martingale"</span>), <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"martingale Residuals"</span>, <span class="at">main =</span> <span class="st">"All Stratified Transplant, Residual Plot"</span>,<span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">smooth.spline</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type =</span> <span class="st">"martingale"</span>)),<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(all_strTrtmnt.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       chisq df     p
+age    0.331  1 0.565
+prior2 3.410  1 0.065
+GLOBAL 3.771  2 0.152</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all_strTrtmnt.mod)[<span class="dv">1</span>])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all_strTrtmnt.mod)[<span class="dv">2</span>])</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="estimate-survival-curves." class="level2">
+<h2 class="anchored" data-anchor-id="estimate-survival-curves.">Estimate survival curves.</h2>
+<p>The advantage of the Cox PHM is that we do not need to know the baseline hazard. Not knowing the baseline hazard means we can not say the hazard for the studied group. We can only give the ratio of those two. Without the baseline hazard and the hazard of the studied group, survival curves can not be calculated. However using mean values of variables a survival curve can be estimated using ggsurvplot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(all_strTrtmnt.mod), <span class="at">data=</span>heart_transplant, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(), <span class="at">conf.int=</span><span class="cn">TRUE</span>, <span class="at">risk.table=</span><span class="cn">TRUE</span>, <span class="at">tables.height =</span> <span class="fl">0.3</span>, <span class="at">tables.theme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="additional-analysis." class="level2">
+<h2 class="anchored" data-anchor-id="additional-analysis.">Additional analysis.</h2>
+<p>Age has a strong effect in this model. For further analysis, age was categorized into &lt;40, 40-49, 50+. A model was generated for this age categorized variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>age2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">41</span>,<span class="dv">0</span>,<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">51</span>,<span class="dv">1</span>,<span class="dv">2</span>)))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(heart_transplant)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from package:survival:
+
+    transplant</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(age2, <span class="at">xlab=</span><span class="st">"Age (&lt;40, 40-49, 50+)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Heart_transplant_coxph_v2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with chategorized age</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>all_agechat.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age2 <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all_agechat.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ age2 + prior2 + strata(transplant2))
+
+  n= 99, number of events= 71 
+
+          coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+age2    0.7337    2.0828   0.1808  4.059 4.93e-05 ***
+prior2 -0.7177    0.4879   0.4451 -1.613    0.107    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+       exp(coef) exp(-coef) lower .95 upper .95
+age2      2.0828     0.4801    1.4614     2.968
+prior2    0.4879     2.0497    0.2039     1.167
+
+Concordance= 0.634  (se = 0.041 )
+Likelihood ratio test= 20.9  on 2 df,   p=3e-05
+Wald test            = 20.01  on 2 df,   p=5e-05
+Score (logrank) test = 21.14  on 2 df,   p=3e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

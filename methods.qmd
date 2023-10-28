@@ -1,5 +1,9 @@
 # Method: Cox regression
-
+```{r}
+library(survival)
+#install.packages("survminer")
+library(survminer)
+```
 ## Methods
 
 The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable xi . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g. death in most survival analysis) \[1\]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.
