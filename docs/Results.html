@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>results</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survminer")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggpubr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'survminer'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:survival':
+
+    myeloma</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>heart_transplant <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./heart_transplant.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#generate numeric columns for survived, prior, and transplant from existing charachter columns</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>survived2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>survived<span class="sc">==</span><span class="st">"dead"</span>,<span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>prior2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>prior<span class="sc">==</span><span class="st">"yes"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>transplant2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>transplant<span class="sc">==</span><span class="st">"treatment"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>all_strTrtmnt.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2), <span class="at">data=</span>heart_transplant)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all_strTrtmnt.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior2 + strata(transplant2), 
+    data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+           coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+age     0.04662   1.04773  0.01434  3.250  0.00115 **
+prior2 -0.78988   0.45390  0.44480 -1.776  0.07576 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+       exp(coef) exp(-coef) lower .95 upper .95
+age       1.0477     0.9544    1.0187     1.078
+prior2    0.4539     2.2031    0.1898     1.085
+
+Concordance= 0.642  (se = 0.038 )
+Likelihood ratio test= 15.95  on 2 df,   p=3e-04
+Wald test            = 13.96  on 2 df,   p=9e-04
+Score (logrank) test = 14.36  on 2 df,   p=8e-04</code></pre>
+</div>
+</div>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>Let’s look at the data, Image 1 best illustrates this answer. The rate of death with no heart transplant drops significantly over time. The number of patients who did not receive a transplant is 32, with only 2 surviving past 500 days. Patients who did receive the transplant are 67, with more than 22 surviving past 500 days. In Image 2 categories patients under 40, between 40-50 and over 50 years old and a hazard ratio of 2.08. From one category to the next this tells us you are twice as likely to die. Not accounting for if you get the transplant or not. First model excluded wait time as wait time is only available for patients who received transplant, and not all patients in the study had the opportunity to receive a heart transplant. The C-statistic =0.747 (see Table 1). ## Code #generate model without wait time #wait time is only available for those who received transplant</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>all.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior <span class="sc">+</span> transplant, <span class="at">data=</span>heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Second model generated included wait time to see if wait time is significant, only looking at records that received the transplant, not the control who did not receive transplant. The result C-statistic =0.683 (see Table 2).</p>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>treated.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior <span class="sc">+</span> wait, <span class="at">data=</span>heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Third model without an accepted year was generated and then compared using an ANOVA table (see Table 4). The p-value = 0.1656 which is greater than 0.05 and we can drop the accepted year as a variable.</p>
+</section>
+<section id="code-1" class="level2">
+<h2 class="anchored" data-anchor-id="code-1">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without accepted year</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>all2.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior <span class="sc">+</span> transplant, <span class="at">data=</span>heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The C-statistic for the model without an accepted year is equal to 0.739 (see Table 3). Which shows that this model has a higher predictability capabilities compared to the model including the accepted year with a C-statistic = 0.683.</p>
+</section>
+<section id="code-2" class="level2">
+<h2 class="anchored" data-anchor-id="code-2">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#examine model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all2.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior + transplant, 
+    data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+                        coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+age                  0.05647   1.05810  0.01457  3.875 0.000107 ***
+prioryes            -0.70778   0.49274  0.44368 -1.595 0.110655    
+transplanttreatment -1.72587   0.17802  0.28398 -6.077 1.22e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                    exp(coef) exp(-coef) lower .95 upper .95
+age                    1.0581     0.9451    1.0283    1.0888
+prioryes               0.4927     2.0295    0.2065    1.1756
+transplanttreatment    0.1780     5.6174    0.1020    0.3106
+
+Concordance= 0.746  (se = 0.031 )
+Likelihood ratio test= 47.31  on 3 df,   p=3e-10
+Wald test            = 48.37  on 3 df,   p=2e-10
+Score (logrank) test = 55.28  on 3 df,   p=6e-12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compare model that includes acceptedyear and that does not</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#high p value, there is not a statistically significant difference between the two models, can</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#drop the variable</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(survtime, survived2)
+ Model 1: ~ acceptyear + age + prior + transplant
+ Model 2: ~ age + prior + transplant
+   loglik  Chisq Df Pr(&gt;|Chi|)
+1 -255.49                     
+2 -256.28 1.5784  1      0.209</code></pre>
+</div>
+</div>
+<p>The C-statistic for the model without an accepted year is equal to 0.739 (see Table 3). Which shows that this model has a higher predictability capabilities compared to the model including the accepted year with a C-statistic = 0.683.</p>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<p>The key question at the heart of our study revolves around a fundamental question healthcare: does a heart transplant prolong the life of patients? Logically, one would assume that undergoing such a significant medical procedure, with all the risk involved and complexities, should lead to an extended life of the individual. After all, why would patients willingly choose to undergo heart transplants if they did not anticipate the promise of improved survival and a better quality of life? To address this key question, we delved into the data provided by Stanford Heart Transplant Study, utilizing the Cox Regression model to shed light on the matter. Our analysis, as portrayed in Image 1, provides a compelling answer to the question. In this graph, patients who received a heart transplant are represented in teal, while those who did not receive a transplant are represented in red. The important observation is the remarkable decrease in the rate of death among those who did not undergo a heart transplant over time. The total sample size was 99 patients, 32 of them did not receive a transplant while 67 others did receive the heart transplant. From the 32 who did not receive a transplant only 2 patients managed to survive past 500 days. In stark contrast, among the 67 patients who did receive the transplant, more than 22 of them survived beyond the 500-day mark. This visually striking contrast suggests that heart transplantation does indeed have a significant impact on extending the lives of patients in this context. Image 2, on the other hand, offers a different perspective by categorizing patients based on age groups; those under 40, those between 40 and 50, and those over 50 years old. The calculated hazard ratio of 2.08 when moving from one age category to the next is a notable finding. This ratio indicates that, all else being equal, patients in a higher age category are approximately twice as likely to face mortality risks. This observation is irrespective of whether they receive a heart transplant or not. In a border sense, this implies that, within the confines of the criteria for inclusion in the study, the need for a heart transplant–advancing from one age group to the next essentially doubles the risk of mortality. This is entirely consistent with our understanding of the aging process and its impact on an individual’s overall health. As one grows older, the body’s ability to withstand the rigors of a medical condition that necessitates a heart transplant diminishes. The data thus reinforces the notion that age itself is a critical factor in determining patients outcomes. In our group’s pursuit of identifying the most robust and predictive model, we turned to the concordance statistics, specifically the C-statistic, as a guiding metric for a model selection. The C-statistic serves as a valuable tool for assessing the discriminatory power of predictive models, aiding in our ability to distinguish their aptitude for accurately ranking risks and predicting outcomes. Our findings are as follows: <span class="math inline">\(\textbf{Model 1: Excluding Wait Time}\)</span> Our initial model was constructed without considering wait time as a variable. This decision was rooted in the understanding that wait time data was only available for patients who ultimately received a heart transplant, excluding those who did not have the opportunity to undergo the procedure. The C-statistic for this model, as presented in Table 1, was calculated to be 0.747. This initial C-statistic provided an encouraging start for our analysis.</p>
+<p></p>
+<p>The second model purpose was to assess the significance of wait time as a predictor of outcomes but was excluded as an actual model due to the fact that it only applies to a subgroup of patients who received a heart transplant. In this instance, the model excluded the control group. The C-statistic for this model, focusing solely on transplant recipients, was 0.683, as detailed in Table 2. However, it’s important to note that this model’s utility is limited due to its omission of the control group, which restricts its generalizability and practicality. Model 3: Variable Selection and ANOVA Table Continuing our goal for the most informative model, we developed a third model. In this iteration, we sought to explore the influence of the “accepted year” variable on predictive capabilities. To make an informed decision regarding the necessity of including this variable, we meticulously assessed its impact using an ANOVA table (as shown in Table 4). The analysis provided us with a p-value of 0.1656, exceeding the common significance level of 0.05. As a result, we concluded that “accepted year” could be excluded as a variable in the model.</p>
+<p> With “accepted year” removed as a variable, we obtained a C-statistic of 0.739 for this refined model, as indicated in Table. The improved C-statistic underscores the enhanced predictive capabilities of this modelwhen compare to the previous iteration, which included “accepted year” and had a C-statistic of 0.683</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In conclusion, our research provides strong support that heart transplantation has a positive and significant impact on extending the lives of patients. The data was provided by Stanford Heart Transplant Study. With the help of a survival analysis tool: Cox Regression model. The Cox regression was best suited for this study due to the fact that it is suitable for time-to-event outcomes. In this case, how much longer does a patient live if given a heart transplant versus those who do not receive the transplant. In some cases patients post transplant lived an extra 1-4 years. The best model used to support the data and build the images was Model 3. Future research could look into which age group had best survivability post transplant. This could provide healthcare workers valuable information regarding who should get the heart transplant if there are patients in different age groups who are waiting for a new heart and which would benefit the most and survive. As we know donated organs are not easy to come by and making sure that an organ such as a heart should go to the best candidate that would live longer with that new heart. Our findings contribute to a deeper understanding of the complex interplay between heart transplantation, age and patient outcomes in the realm of cardiac healthcare.</p>
+<p></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
+    prior + transplant, data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+                        coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+acceptyear          -0.08294   0.92040  0.06647 -1.248 0.212083    
+age                  0.05553   1.05711  0.01432  3.878 0.000105 ***
+prioryes            -0.63345   0.53076  0.44818 -1.413 0.157542    
+transplanttreatment -1.69836   0.18298  0.28791 -5.899 3.66e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                    exp(coef) exp(-coef) lower .95 upper .95
+acceptyear             0.9204      1.086    0.8080    1.0485
+age                    1.0571      0.946    1.0278    1.0872
+prioryes               0.5308      1.884    0.2205    1.2776
+transplanttreatment    0.1830      5.465    0.1041    0.3217
+
+Concordance= 0.756  (se = 0.031 )
+Likelihood ratio test= 48.89  on 4 df,   p=6e-10
+Wald test            = 49.36  on 4 df,   p=5e-10
+Score (logrank) test = 55.91  on 4 df,   p=2e-11</code></pre>
+</div>
+</div>
+<p></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treated.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
+    prior + wait, data = heart_transplant)
+
+  n= 67, number of events= 43 
+   (32 observations deleted due to missingness)
+
+                coef exp(coef)  se(coef)      z Pr(&gt;|z|)  
+acceptyear  0.005578  1.005594  0.095776  0.058   0.9536  
+age         0.050544  1.051843  0.021308  2.372   0.0177 *
+prioryes   -0.751733  0.471549  0.453454 -1.658   0.0974 .
+wait       -0.008337  0.991697  0.005109 -1.632   0.1027  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+           exp(coef) exp(-coef) lower .95 upper .95
+acceptyear    1.0056     0.9944    0.8335     1.213
+age           1.0518     0.9507    1.0088     1.097
+prioryes      0.4715     2.1207    0.1939     1.147
+wait          0.9917     1.0084    0.9818     1.002
+
+Concordance= 0.685  (se = 0.043 )
+Likelihood ratio test= 14.23  on 4 df,   p=0.007
+Wald test            = 12.64  on 4 df,   p=0.01
+Score (logrank) test = 13.19  on 4 df,   p=0.01</code></pre>
+</div>
+</div>
+<p></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all2.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior + transplant, 
+    data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+                        coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+age                  0.05647   1.05810  0.01457  3.875 0.000107 ***
+prioryes            -0.70778   0.49274  0.44368 -1.595 0.110655    
+transplanttreatment -1.72587   0.17802  0.28398 -6.077 1.22e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                    exp(coef) exp(-coef) lower .95 upper .95
+age                    1.0581     0.9451    1.0283    1.0888
+prioryes               0.4927     2.0295    0.2065    1.1756
+transplanttreatment    0.1780     5.6174    0.1020    0.3106
+
+Concordance= 0.746  (se = 0.031 )
+Likelihood ratio test= 47.31  on 3 df,   p=3e-10
+Wald test            = 48.37  on 3 df,   p=2e-10
+Score (logrank) test = 55.28  on 3 df,   p=6e-12</code></pre>
+</div>
+</div>
+<p></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(survtime, survived2)
+ Model 1: ~ acceptyear + age + prior + transplant
+ Model 2: ~ age + prior + transplant
+   loglik  Chisq Df Pr(&gt;|Chi|)
+1 -255.49                     
+2 -256.28 1.5784  1      0.209</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
