@@ -1,0 +1,597 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, frame hidden, breakable, enhanced, borderline west={3pt}{0pt}{shadecolor}, sharp corners]}{\end{tcolorbox}}\fi
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(survival)}
+\CommentTok{\#install.packages("survminer")}
+\FunctionTok{library}\NormalTok{(survminer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+Loading required package: ggpubr
+\end{verbatim}
+
+\begin{verbatim}
+
+Attaching package: 'survminer'
+\end{verbatim}
+
+\begin{verbatim}
+The following object is masked from 'package:survival':
+
+    myeloma
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heart\_transplant }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./heart\_transplant.csv"}\NormalTok{)}
+\CommentTok{\#generate numeric columns for survived, prior, and transplant from existing charachter columns}
+\NormalTok{heart\_transplant}\SpecialCharTok{$}\NormalTok{survived2 }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(heart\_transplant}\SpecialCharTok{$}\NormalTok{survived}\SpecialCharTok{==}\StringTok{"dead"}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\textgreater{}} \DecValTok{0}
+\NormalTok{heart\_transplant}\SpecialCharTok{$}\NormalTok{prior2 }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(heart\_transplant}\SpecialCharTok{$}\NormalTok{prior}\SpecialCharTok{==}\StringTok{"yes"}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+\NormalTok{heart\_transplant}\SpecialCharTok{$}\NormalTok{transplant2 }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(heart\_transplant}\SpecialCharTok{$}\NormalTok{transplant}\SpecialCharTok{==}\StringTok{"treatment"}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+\NormalTok{all\_strTrtmnt.mod }\OtherTok{\textless{}{-}} \FunctionTok{coxph}\NormalTok{(}\FunctionTok{Surv}\NormalTok{(survtime, survived2)}\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ prior2 }\SpecialCharTok{+} \FunctionTok{strata}\NormalTok{(transplant2), }\AttributeTok{data=}\NormalTok{heart\_transplant)}
+\FunctionTok{summary}\NormalTok{(all\_strTrtmnt.mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior2 + strata(transplant2), 
+    data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+           coef exp(coef) se(coef)      z Pr(>|z|)   
+age     0.04662   1.04773  0.01434  3.250  0.00115 **
+prior2 -0.78988   0.45390  0.44480 -1.776  0.07576 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+       exp(coef) exp(-coef) lower .95 upper .95
+age       1.0477     0.9544    1.0187     1.078
+prior2    0.4539     2.2031    0.1898     1.085
+
+Concordance= 0.642  (se = 0.038 )
+Likelihood ratio test= 15.95  on 2 df,   p=3e-04
+Wald test            = 13.96  on 2 df,   p=9e-04
+Score (logrank) test = 14.36  on 2 df,   p=8e-04
+\end{verbatim}
+
+\hypertarget{results}{%
+\chapter{Results}\label{results}}
+
+Let's look at the data, Image 1 best illustrates this answer. The rate
+of death with no heart transplant drops significantly over time. The
+number of patients who did not receive a transplant is 32, with only 2
+surviving past 500 days. Patients who did receive the transplant are 67,
+with more than 22 surviving past 500 days. In Image 2 categories
+patients under 40, between 40-50 and over 50 years old and a hazard
+ratio of 2.08. From one category to the next this tells us you are twice
+as likely to die. Not accounting for if you get the transplant or not.
+First model excluded wait time as wait time is only available for
+patients who received transplant, and not all patients in the study had
+the opportunity to receive a heart transplant. The C-statistic =0.747
+(see Table 1). \#\# Code \#generate model without wait time \#wait time
+is only available for those who received transplant
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all.mod }\OtherTok{\textless{}{-}} \FunctionTok{coxph}\NormalTok{(}\FunctionTok{Surv}\NormalTok{(survtime, survived2)}\SpecialCharTok{\textasciitilde{}}\NormalTok{ acceptyear }\SpecialCharTok{+}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ prior }\SpecialCharTok{+}\NormalTok{ transplant, }\AttributeTok{data=}\NormalTok{heart\_transplant)}
+\end{Highlighting}
+\end{Shaded}
+
+Second model generated included wait time to see if wait time is
+significant, only looking at records that received the transplant, not
+the control who did not receive transplant. The result C-statistic
+=0.683 (see Table 2).
+
+\hypertarget{code}{%
+\section{Code}\label{code}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treated.mod }\OtherTok{\textless{}{-}} \FunctionTok{coxph}\NormalTok{(}\FunctionTok{Surv}\NormalTok{(survtime, survived2)}\SpecialCharTok{\textasciitilde{}}\NormalTok{ acceptyear }\SpecialCharTok{+}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ prior }\SpecialCharTok{+}\NormalTok{ wait, }\AttributeTok{data=}\NormalTok{heart\_transplant)}
+\end{Highlighting}
+\end{Shaded}
+
+Third model without an accepted year was generated and then compared
+using an ANOVA table (see Table 4). The p-value = 0.1656 which is
+greater than 0.05 and we can drop the accepted year as a variable.
+
+\hypertarget{code-1}{%
+\section{Code}\label{code-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#generate model without accepted year}
+\NormalTok{all2.mod }\OtherTok{\textless{}{-}} \FunctionTok{coxph}\NormalTok{(}\FunctionTok{Surv}\NormalTok{(survtime, survived2)}\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ prior }\SpecialCharTok{+}\NormalTok{ transplant, }\AttributeTok{data=}\NormalTok{heart\_transplant)}
+\end{Highlighting}
+\end{Shaded}
+
+The C-statistic for the model without an accepted year is equal to 0.739
+(see Table 3). Which shows that this model has a higher predictability
+capabilities compared to the model including the accepted year with a
+C-statistic = 0.683.
+
+\hypertarget{code-2}{%
+\section{Code}\label{code-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#examine model}
+\FunctionTok{summary}\NormalTok{(all2.mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior + transplant, 
+    data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+                        coef exp(coef) se(coef)      z Pr(>|z|)    
+age                  0.05647   1.05810  0.01457  3.875 0.000107 ***
+prioryes            -0.70778   0.49274  0.44368 -1.595 0.110655    
+transplanttreatment -1.72587   0.17802  0.28398 -6.077 1.22e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                    exp(coef) exp(-coef) lower .95 upper .95
+age                    1.0581     0.9451    1.0283    1.0888
+prioryes               0.4927     2.0295    0.2065    1.1756
+transplanttreatment    0.1780     5.6174    0.1020    0.3106
+
+Concordance= 0.746  (se = 0.031 )
+Likelihood ratio test= 47.31  on 3 df,   p=3e-10
+Wald test            = 48.37  on 3 df,   p=2e-10
+Score (logrank) test = 55.28  on 3 df,   p=6e-12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#compare model that includes acceptedyear and that does not}
+\CommentTok{\#high p value, there is not a statistically significant difference between the two models, can}
+\CommentTok{\#drop the variable}
+\FunctionTok{anova}\NormalTok{(all.mod, all2.mod, }\AttributeTok{test=}\StringTok{"LRT"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Deviance Table
+ Cox model: response is  Surv(survtime, survived2)
+ Model 1: ~ acceptyear + age + prior + transplant
+ Model 2: ~ age + prior + transplant
+   loglik  Chisq Df Pr(>|Chi|)
+1 -255.49                     
+2 -256.28 1.5784  1      0.209
+\end{verbatim}
+
+The C-statistic for the model without an accepted year is equal to 0.739
+(see Table 3). Which shows that this model has a higher predictability
+capabilities compared to the model including the accepted year with a
+C-statistic = 0.683.
+
+\hypertarget{discussion}{%
+\chapter{Discussion}\label{discussion}}
+
+The key question at the heart of our study revolves around a fundamental
+question healthcare: does a heart transplant prolong the life of
+patients? Logically, one would assume that undergoing such a significant
+medical procedure, with all the risk involved and complexities, should
+lead to an extended life of the individual. After all, why would
+patients willingly choose to undergo heart transplants if they did not
+anticipate the promise of improved survival and a better quality of
+life? To address this key question, we delved into the data provided by
+Stanford Heart Transplant Study, utilizing the Cox Regression model to
+shed light on the matter. Our analysis, as portrayed in Image 1,
+provides a compelling answer to the question. In this graph, patients
+who received a heart transplant are represented in teal, while those who
+did not receive a transplant are represented in red. The important
+observation is the remarkable decrease in the rate of death among those
+who did not undergo a heart transplant over time. The total sample size
+was 99 patients, 32 of them did not receive a transplant while 67 others
+did receive the heart transplant. From the 32 who did not receive a
+transplant only 2 patients managed to survive past 500 days. In stark
+contrast, among the 67 patients who did receive the transplant, more
+than 22 of them survived beyond the 500-day mark. This visually striking
+contrast suggests that heart transplantation does indeed have a
+significant impact on extending the lives of patients in this context.
+Image 2, on the other hand, offers a different perspective by
+categorizing patients based on age groups; those under 40, those between
+40 and 50, and those over 50 years old. The calculated hazard ratio of
+2.08 when moving from one age category to the next is a notable finding.
+This ratio indicates that, all else being equal, patients in a higher
+age category are approximately twice as likely to face mortality risks.
+This observation is irrespective of whether they receive a heart
+transplant or not. In a border sense, this implies that, within the
+confines of the criteria for inclusion in the study, the need for a
+heart transplant--advancing from one age group to the next essentially
+doubles the risk of mortality. This is entirely consistent with our
+understanding of the aging process and its impact on an individual's
+overall health. As one grows older, the body's ability to withstand the
+rigors of a medical condition that necessitates a heart transplant
+diminishes. The data thus reinforces the notion that age itself is a
+critical factor in determining patients outcomes. In our group's pursuit
+of identifying the most robust and predictive model, we turned to the
+concordance statistics, specifically the C-statistic, as a guiding
+metric for a model selection. The C-statistic serves as a valuable tool
+for assessing the discriminatory power of predictive models, aiding in
+our ability to distinguish their aptitude for accurately ranking risks
+and predicting outcomes. Our findings are as follows:
+\(\textbf{Model 1: Excluding Wait Time}\) Our initial model was
+constructed without considering wait time as a variable. This decision
+was rooted in the understanding that wait time data was only available
+for patients who ultimately received a heart transplant, excluding those
+who did not have the opportunity to undergo the procedure. The
+C-statistic for this model, as presented in Table 1, was calculated to
+be 0.747. This initial C-statistic provided an encouraging start for our
+analysis.
+
+\textbf{Model 2: Including Wait Time for Transplant Recipients}
+
+The second model purpose was to assess the significance of wait time as
+a predictor of outcomes but was excluded as an actual model due to the
+fact that it only applies to a subgroup of patients who received a heart
+transplant. In this instance, the model excluded the control group. The
+C-statistic for this model, focusing solely on transplant recipients,
+was 0.683, as detailed in Table 2. However, it's important to note that
+this model's utility is limited due to its omission of the control
+group, which restricts its generalizability and practicality. Model 3:
+Variable Selection and ANOVA Table Continuing our goal for the most
+informative model, we developed a third model. In this iteration, we
+sought to explore the influence of the ``accepted year'' variable on
+predictive capabilities. To make an informed decision regarding the
+necessity of including this variable, we meticulously assessed its
+impact using an ANOVA table (as shown in Table 4). The analysis provided
+us with a p-value of 0.1656, exceeding the common significance level of
+0.05. As a result, we concluded that ``accepted year'' could be excluded
+as a variable in the model.
+
+\textbf{Model 3: Without Accepted Year} With ``accepted year'' removed
+as a variable, we obtained a C-statistic of 0.739 for this refined
+model, as indicated in Table. The improved C-statistic underscores the
+enhanced predictive capabilities of this modelwhen compare to the
+previous iteration, which included ``accepted year'' and had a
+C-statistic of 0.683
+
+\hypertarget{conclusion}{%
+\chapter{Conclusion}\label{conclusion}}
+
+In conclusion, our research provides strong support that heart
+transplantation has a positive and significant impact on extending the
+lives of patients. The data was provided by Stanford Heart Transplant
+Study. With the help of a survival analysis tool: Cox Regression model.
+The Cox regression was best suited for this study due to the fact that
+it is suitable for time-to-event outcomes. In this case, how much longer
+does a patient live if given a heart transplant versus those who do not
+receive the transplant. In some cases patients post transplant lived an
+extra 1-4 years. The best model used to support the data and build the
+images was Model 3. Future research could look into which age group had
+best survivability post transplant. This could provide healthcare
+workers valuable information regarding who should get the heart
+transplant if there are patients in different age groups who are waiting
+for a new heart and which would benefit the most and survive. As we know
+donated organs are not easy to come by and making sure that an organ
+such as a heart should go to the best candidate that would live longer
+with that new heart. Our findings contribute to a deeper understanding
+of the complex interplay between heart transplantation, age and patient
+outcomes in the realm of cardiac healthcare.
+
+\textbf{Table 1: With variables: Accepted Year, Age, Prior, and Transplant}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(all.mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
+    prior + transplant, data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+                        coef exp(coef) se(coef)      z Pr(>|z|)    
+acceptyear          -0.08294   0.92040  0.06647 -1.248 0.212083    
+age                  0.05553   1.05711  0.01432  3.878 0.000105 ***
+prioryes            -0.63345   0.53076  0.44818 -1.413 0.157542    
+transplanttreatment -1.69836   0.18298  0.28791 -5.899 3.66e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                    exp(coef) exp(-coef) lower .95 upper .95
+acceptyear             0.9204      1.086    0.8080    1.0485
+age                    1.0571      0.946    1.0278    1.0872
+prioryes               0.5308      1.884    0.2205    1.2776
+transplanttreatment    0.1830      5.465    0.1041    0.3217
+
+Concordance= 0.756  (se = 0.031 )
+Likelihood ratio test= 48.89  on 4 df,   p=6e-10
+Wald test            = 49.36  on 4 df,   p=5e-10
+Score (logrank) test = 55.91  on 4 df,   p=2e-11
+\end{verbatim}
+
+\textbf{Table 2: With Variables Accepted Year, Age, Prior, and Wait Time}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(treated.mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
+    prior + wait, data = heart_transplant)
+
+  n= 67, number of events= 43 
+   (32 observations deleted due to missingness)
+
+                coef exp(coef)  se(coef)      z Pr(>|z|)  
+acceptyear  0.005578  1.005594  0.095776  0.058   0.9536  
+age         0.050544  1.051843  0.021308  2.372   0.0177 *
+prioryes   -0.751733  0.471549  0.453454 -1.658   0.0974 .
+wait       -0.008337  0.991697  0.005109 -1.632   0.1027  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+           exp(coef) exp(-coef) lower .95 upper .95
+acceptyear    1.0056     0.9944    0.8335     1.213
+age           1.0518     0.9507    1.0088     1.097
+prioryes      0.4715     2.1207    0.1939     1.147
+wait          0.9917     1.0084    0.9818     1.002
+
+Concordance= 0.685  (se = 0.043 )
+Likelihood ratio test= 14.23  on 4 df,   p=0.007
+Wald test            = 12.64  on 4 df,   p=0.01
+Score (logrank) test = 13.19  on 4 df,   p=0.01
+\end{verbatim}
+
+\textbf{Table 3: Model with Age, Prior, Transplant and Without Accepted Year}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(all2.mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+coxph(formula = Surv(survtime, survived2) ~ age + prior + transplant, 
+    data = heart_transplant)
+
+  n= 99, number of events= 71 
+
+                        coef exp(coef) se(coef)      z Pr(>|z|)    
+age                  0.05647   1.05810  0.01457  3.875 0.000107 ***
+prioryes            -0.70778   0.49274  0.44368 -1.595 0.110655    
+transplanttreatment -1.72587   0.17802  0.28398 -6.077 1.22e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                    exp(coef) exp(-coef) lower .95 upper .95
+age                    1.0581     0.9451    1.0283    1.0888
+prioryes               0.4927     2.0295    0.2065    1.1756
+transplanttreatment    0.1780     5.6174    0.1020    0.3106
+
+Concordance= 0.746  (se = 0.031 )
+Likelihood ratio test= 47.31  on 3 df,   p=3e-10
+Wald test            = 48.37  on 3 df,   p=2e-10
+Score (logrank) test = 55.28  on 3 df,   p=6e-12
+\end{verbatim}
+
+\textbf{Table 4: ANOVA Table Comparing Models 1 & 2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(all.mod, all2.mod, }\AttributeTok{test=}\StringTok{"LRT"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Deviance Table
+ Cox model: response is  Surv(survtime, survived2)
+ Model 1: ~ acceptyear + age + prior + transplant
+ Model 2: ~ age + prior + transplant
+   loglik  Chisq Df Pr(>|Chi|)
+1 -255.49                     
+2 -256.28 1.5784  1      0.209
+\end{verbatim}
+
+
+
+\end{document}
