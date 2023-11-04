@@ -1,5 +1,7 @@
 # Cox Proportion Models {.unnumbered}
 
+Dimir, Ivan
+
 [Introduction](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/intro.html)
 
 [Methods](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/methods.html)
