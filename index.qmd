@@ -1,9 +1,9 @@
-# Preface {.unnumbered}
+# Cox Proportion Models {.unnumbered}
 
-This is a Quarto book.
+[Introduction](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/intro.html)
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+[Methods](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/methods.html)
 
-```{r}
-1 + 1
-```
+[Results](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/Results.html)
+
+[References](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/references.html)
