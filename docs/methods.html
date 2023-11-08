@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -121,18 +92,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-search-results"></div>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="methods.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -140,117 +114,168 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="method-cox-regression" class="level1">
 <h1>Method: Cox regression</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survminer")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggpubr</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'survminer'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:survival':
-
-    myeloma</code></pre>
-</div>
-</div>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable xi . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g.&nbsp;death in most survival analysis) [1]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.</p>
+<p>The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable <span class="math inline">\(x_i\)</span> . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g.&nbsp;death in most survival analysis) [1]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.</p>
 <p>The Cox regression model is based on the hazard function. Mathematically written as :</p>
 <p><span class="math display">\[
-h_i(t)=h_0(t) \times e\beta_0 + \beta_1X_{i1} + \beta_{2}X_{i2} + \dots + \beta n X_{in}
+h_i(t)=h_0(t) \times exp (\beta_1X_{i1} + \beta_{2}X_{i2} + \dots + \beta_n X_{in})
 \]</span></p>
-<p>Where i= 1,2,…, N indexes patients, t represents time, <span class="math inline">\(h_i(t)\)</span> is the hazard function for person i at time period t, h_0 is the baseline hazard, X_{i1} ,X_{i2} , … X_{in} is a set of independent variables (predictor variables) for person i and <span class="math inline">\(𝛽_0\)</span> are the regression coefficients for the independent variables [2].</p>
+<p>Where i= 1,2,…, n indexes patients, t represents time, <span class="math inline">\(h_i(t)\)</span> is the hazard function for person i at time period t, h_0 is the baseline hazard, <span class="math inline">\(X_{i1}\)</span> , <span class="math inline">\(X_{i2}\)</span> , … <span class="math inline">\(X_{in}\)</span> is a set of independent variables (predictor variables) for person i and <span class="math inline">\(𝛽_0\)</span> are the regression coefficients for the independent variables [2]. Said another way, with the use of th analysis this paper focuses on as example, the hazard of death for being accepted as a heart transplant candidate is equal to the “normal” hazard of death multiplied by an exponential. That exponential is a linear combination of the predictor variables. The Cox PH model then fits the regression coefficients <span class="math inline">\(\beta\)</span>s in accordance with the data.</p>
 <p>Linear regression model on the other hand is not a good fit for this type of data for the following reasons. Survival analysis has two unique characteristics that linear regression doesn’t handle well, censoring and time to event outcomes. Censored data is assumed to be all completed under linear regression and that is not the case in survival analysis. Secondly, linear regression assumes a constant relationship between predictors and response variables. Survival data can exhibit hazard rates, which linear regression can not handle too well.</p>
 <p>The other survival analysis model that is often used is the Kaplan-Meier (KM) Survival Analysis. K-M survival analysis is best used to measure the fraction of subjects living for a certain amount of time after treatment [3]. Censored observations don’t hinder the K-M analysis similarly to Cox PMH. The one thing that Cox PMH can do that K-M analysis cannot is performing multivariate analysis by assessing the simultaneous effects of multiple predictor variables on survival outcomes (such as what we are doing with our data), because of this K-M analysis is considered univariate analysis [4].</p>
-<p>Data for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates [5]. These continuing candidates contribute to the censoring data.</p>
-<p>The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior and transplant. Accepted year was the year the patient was included as an official candidate in the experiment and in the data these values are stored under “acceptyear”. Their age when accepted in the study is labeled “age”. Third predictor is whether or not the patient had prior surgeries with the header “prior”. Finally, transplant status, if the patient received the heart transplant or not stored under the column name “transplant”. The criteria (y variable) are survival status weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant is labeled “survtime”.</p>
-<p>Variables within the data set such as, the columns: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns. A model was generated without the variable wait time due to the fact that only patients who received the transplant had a wait time. In order to include more patients (n=103) into the model, wait time was not chosen as a predictor variable.</p>
-<p>The data was categorized into under 40, 40-50, and 50 and over, a histogram was generated <span class="math inline">\(\textbf Image 2\)</span> shows from one age category to another a patient is twice as likely to die. This does not include accounting for if you get a transplant or not. Being in need of a transplant, in addition to going from one age group to another the risk of dying is doubled. Two Cox proportional hazard models (PHM) are used in order to stratify the data on the transplant variable. One Cox PHM for those who receive the transplant and one for those who do not. When the data is stratified by transplant status, non-proportionality is better visualized as seen in <span class="math inline">\(\textbf Image 1\)</span>, those that do not have the transplant die off at a much steeper rate than those that do have transplant. Image 1 Survival rate with Transplant and without Transplant Image 2 Risk of dying due to age group.</p>
-<p><span class="math inline">\(\textbf Image 1\)</span> Survival rate with Transplant and without Transplant</p>
+<p>Dividing both sides by the baseline hazard yields the hazard ratio.</p>
+<p><span class="math display">\[
+h(t)/h_0(t)= exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
+\]</span></p>
+<p>Taking the natural log yields a formula that has some similarity to linear regression. The log of the hazard ratio has a linear relationship to the predictor variables.</p>
+<p><span class="math display">\[
+ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
+\]</span></p>
+<section id="data-examination-and-transformation" class="level4">
+<h4 class="anchored" data-anchor-id="data-examination-and-transformation">Data Examination and Transformation</h4>
+<p>Data [5] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates [6]. These continuing candidates contribute to the censoring data.</p>
+<p>The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior, and transplant. Accepted year was the year the patient was accepted as a heart transplant candidate and in the data these values are stored under “acceptyear”. Their age when accepted in the study is labeled “age”. Third predictor is whether or not the patient had prior surgeries with the header “prior”. Finally, transplant status, if the patient received the heart transplant or not, stored under the column name “transplant”. The criteria (y variable) are survival status “survived” weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant, labeled “survtime”.</p>
+<p>Variables within the data set such as: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>heart_transplant <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./heart_transplant.csv"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#generate numeric columns for survived, prior, and transplant from existing charachter columns</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>survived2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>survived<span class="sc">==</span><span class="st">"dead"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>prior2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>prior<span class="sc">==</span><span class="st">"yes"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>transplant2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>transplant<span class="sc">==</span><span class="st">"treatment"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>all_strTrtmnt.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2), <span class="at">data=</span>heart_transplant)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all_strTrtmnt.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Call:
-coxph(formula = Surv(survtime, survived2) ~ age + prior2 + strata(transplant2), 
-    data = heart_transplant)
-
-  n= 99, number of events= 71 
-
-           coef exp(coef) se(coef)      z Pr(&gt;|z|)   
-age     0.04662   1.04773  0.01434  3.250  0.00115 **
-prior2 -0.78988   0.45390  0.44480 -1.776  0.07576 . 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-       exp(coef) exp(-coef) lower .95 upper .95
-age       1.0477     0.9544    1.0187     1.078
-prior2    0.4539     2.2031    0.1898     1.085
-
-Concordance= 0.642  (se = 0.038 )
-Likelihood ratio test= 15.95  on 2 df,   p=3e-04
-Wald test            = 13.96  on 2 df,   p=9e-04
-Score (logrank) test = 14.36  on 2 df,   p=8e-04</code></pre>
-</div>
+<details>
+<summary>Show the code for data conversion</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>heart_transplant <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./heart_transplant.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#generate numeric columns for survived, prior, and transplant from existing charachter columns</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>survived2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>survived<span class="sc">==</span><span class="st">"dead"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>prior2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>prior<span class="sc">==</span><span class="st">"yes"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>transplant2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>transplant<span class="sc">==</span><span class="st">"treatment"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(all_strTrtmnt.mod), <span class="at">data=</span>heart_transplant, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(), <span class="at">conf.int=</span><span class="cn">TRUE</span>, <span class="at">risk.table=</span><span class="cn">TRUE</span>, <span class="at">tables.height =</span> <span class="fl">0.3</span>, <span class="at">tables.theme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Show the code for the histograms</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#examine variables more</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(age, <span class="at">xlab=</span><span class="st">"Age (years)"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(acceptyear, <span class="at">xlab=</span><span class="st">"Year 19XX"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(survtime, <span class="at">xlab=</span><span class="st">"Survivial time (days)"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wait, <span class="at">xlab=</span><span class="st">"Waittime for transplant (days)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="methods_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
+<details>
+<summary>Show the code for the histograms</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(survived2, <span class="at">xlab=</span><span class="st">"Survival Status (0-dead 1-alive)"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(prior2, <span class="at">xlab=</span><span class="st">"Prior Surgery (0-no 1-yes)"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(transplant2, <span class="at">xlab=</span><span class="st">"Transplant Status (0-control-no 1-transplant)"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="methods_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="model-generation" class="level4">
+<h4 class="anchored" data-anchor-id="model-generation">Model generation</h4>
+<p>The first model was generated without the variable wait time due to the fact that only patients who received the transplant (n=67) had a wait time and those patients in the control do not. In order to include more patients (n=99) into the model, wait time was not chosen as a predictor variable in this first model.</p>
+<div class="cell">
+<details>
+<summary>Show the code for the first model</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without wait time</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#wait time is only available for those who received transplant not the control group</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>all.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> transplant2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A second model was generated that examined those who do receive the transplant, to determine if wait (waiting time for transplant) was a significant indicator of patients survival status.</p>
+<div class="cell">
+<details>
+<summary>Show the code for the second model</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>treated.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> wait)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A third model was generated, in similar fashion to the first but this model did not include the variable of accepted year. Models with and without the variable for accepted year were compared based on their log likelihood. A high p value (p&gt;0.05) here would indicate there is not a statistically significant difference between the two models. Thus the variable acceptedyear could be dropped from the model without significantly affecting it.</p>
+<div class="cell">
+<details>
+<summary>Show the code for the third model and anova test</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>all2.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> transplant2)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="check-model-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="check-model-assumptions">Check Model Assumptions</h4>
+<p>The cox proportional hazards model assumptions of linearity and proportional hazards were tested to ensure the data met those assumptions. The linearity assumption is assessed, similarly to how it is assessed in other models, with a plot of the residuals. Here the Martingale residuals were used. The relationship between the x variables and the log hazard should be linear. The Schoenfield test is used to check the proportional hazards assumption. The null hypothesis is the hazards are proportional. A high p value (&gt;0.05) here and we fail to reject the null hypothesis. The Schoenfield test results can also be plotted. Such plots show, if the hazard ratio were to change over time (is not proportional) what would its change look like. To confirm hazards are proportional using a plot of the Schoenfield test, one wants to see that Beta=0 falls within the confidence interval the majority if not all the time.</p>
+<div class="cell">
+<details>
+<summary>Show the code for the test for linearity</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type=</span><span class="st">"martingale"</span>), <span class="at">xlab =</span> <span class="st">"Predicted Values"</span>, <span class="at">ylab =</span> <span class="st">"Martingale Residuals"</span>, <span class="at">main =</span> <span class="st">"All2 Residual Plot"</span>,<span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">smooth.spline</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type =</span> <span class="st">"martingale"</span>)),<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>age2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">41</span>,<span class="dv">0</span>,<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">51</span>,<span class="dv">1</span>,<span class="dv">2</span>)))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(heart_transplant<span class="sc">$</span>age2, <span class="at">xlab=</span><span class="st">"Age (&lt;40, 40-49, 50+)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Show the code for the test for proportional hazards</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(all2.mod)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all2.mod)[<span class="dv">1</span>])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all2.mod)[<span class="dv">2</span>])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cox.zph</span>(all2.mod)[<span class="dv">3</span>])</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="generating-additional-models" class="level4">
+<h4 class="anchored" data-anchor-id="generating-additional-models">Generating Additional Models</h4>
+<p>A fourth model was generated. This one stratified the transplant status. When data does not meet the proportional hazards assumption one method for addressing that is stratification of the variable. This effectively categorizes the variable and creates separate models for each category rather than a single model. In this case two models, one for each status of the transplant variable (0-control-did not receive transplant and 1-treatment-did receive transplant).</p>
+<div class="cell">
+<details>
+<summary>Show the code for the fourth model</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate and examine transplant stratified models.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>all_strTrtmnt.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Lastly, the data was categorized by patient age, into under 40, 40-50, and 50+, a histogram was generated to examine the distribution. A fifth model was generated based on age as a category rather than a continuous value.</p>
+<div class="cell">
+<details>
+<summary>Show the code for the age categorization</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#age categorization &lt;40, 40-50, 50+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(heart_transplant)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>heart_transplant<span class="sc">$</span>age2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">41</span>,<span class="dv">0</span>,<span class="fu">ifelse</span>(heart_transplant<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">51</span>,<span class="dv">1</span>,<span class="dv">2</span>)))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(heart_transplant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Show the code for the fifth model</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot categorized age</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(age2, <span class="at">xlab=</span><span class="st">"Age (&lt;40, 40-49, 50+)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img src="methods_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="methods_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with chategorized age</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>all_agechat.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age2 <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2), <span class="at">data=</span>heart_transplant)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all_agechat.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Call:
-coxph(formula = Surv(survtime, survived2) ~ age2 + prior2 + strata(transplant2), 
-    data = heart_transplant)
-
-  n= 99, number of events= 71 
-
-          coef exp(coef) se(coef)      z Pr(&gt;|z|)    
-age2    0.7337    2.0828   0.1808  4.059 4.93e-05 ***
-prior2 -0.7177    0.4879   0.4451 -1.613    0.107    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-       exp(coef) exp(-coef) lower .95 upper .95
-age2      2.0828     0.4801    1.4614     2.968
-prior2    0.4879     2.0497    0.2039     1.167
-
-Concordance= 0.634  (se = 0.041 )
-Likelihood ratio test= 20.9  on 2 df,   p=3e-05
-Wald test            = 20.01  on 2 df,   p=5e-05
-Score (logrank) test = 21.14  on 2 df,   p=3e-05</code></pre>
+<details>
+<summary>Show the code for the fifth model</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with chategorized age</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>all_agechat.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age2 <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+</section>
+<section id="estimate-survival-curve" class="level4">
+<h4 class="anchored" data-anchor-id="estimate-survival-curve">Estimate Survival Curve</h4>
+<p>The advantage of the Cox PHM is that we do not need to know the baseline hazard <span class="math inline">\(h_0(t)\)</span>. But, not knowing the baseline hazard means we can not say the hazard for the studied group. We can not know <span class="math inline">\(h(t)\)</span> if we do not know <span class="math inline">\(h_0(t)\)</span> <span class="math display">\[
+h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
+\]</span> Without the baseline hazard <span class="math inline">\(h_0(t)\)</span> and the hazard of the studied group <span class="math inline">\(h(t)\)</span>, the above can not be plotted in a plot know as a survival curve. However using mean values of the predictor variables a survival curve can be estimated.</p>
+<div class="cell">
+<details>
+<summary>Show the code for the survival plot</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(all_strTrtmnt.mod), <span class="at">data=</span>heart_transplant, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(), <span class="at">conf.int=</span><span class="cn">TRUE</span>, <span class="at">risk.table=</span><span class="cn">TRUE</span>, <span class="at">tables.height =</span> <span class="fl">0.3</span>, <span class="at">tables.theme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>[1] A. N. Kulaylat and L. Tran, “Chapter 26- Regression Analysis ,” in Translational surgery, Amsterdam : ELSEVIER ACADEMIC PRESS, 2023, pp.&nbsp;157–163</p>
-<p>[2] S. Abd ElHafeez et al., “Methods to analyze time-to-event data: The Cox Regression Analysis,” Oxidative medicine and cellular longevity, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8651375/ (accessed Oct.&nbsp;20, 2023).</p>
-<p>[3] M. K. Goel, P. Khanna, and J. Kishore, “Understanding survival analysis: Kaplan-Meier estimate,” International journal of Ayurveda research, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059453/#:~:text=may%20become%20small.-, The%20Kaplan%2DMeier%20estimate%20is%20the%20simplest%20way%20of%20computing ,associated%20with%20subjects%20or%20situations.&amp;text=For%20each%20time%20interval% 2C%20survival,number%20of%20patients%20at%20risk. (accessed Oct.&nbsp;20, 2023).</p>
-<p>[4] W. N. Dudley, R. Wickham, and N. Coombs, “An introduction to survival statistics: Kaplan-Meier analysis,” Journal of the advanced practitioner in oncology, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5045282/ (accessed Oct.&nbsp;20, 2023).</p>
-<p>[5] Turnbull B, Brown B, and Hu M (1974). “Survivorship of heart transplant data.” Journal of the American Statistical Association, vol.&nbsp;69, pp.&nbsp;74-80.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -282,9 +307,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -349,6 +388,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

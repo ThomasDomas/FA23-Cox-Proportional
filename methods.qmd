@@ -1,66 +1,177 @@
 # Method: Cox regression
+
 ```{r}
+#| output: false
+#| echo: false
 library(survival)
 #install.packages("survminer")
 library(survminer)
 ```
+
 ## Methods
 
-The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable xi . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g. death in most survival analysis) \[1\]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.
+The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable $x_i$ . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g. death in most survival analysis) \[1\]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.
 
 The Cox regression model is based on the hazard function. Mathematically written as :
 
 $$
-h_i(t)=h_0(t) \times e\beta_0 + \beta_1X_{i1} + \beta_{2}X_{i2} + \dots + \beta n X_{in}
+h_i(t)=h_0(t) \times exp (\beta_1X_{i1} + \beta_{2}X_{i2} + \dots + \beta_n X_{in})
 $$
 
-Where i= 1,2,..., N indexes patients, t represents time, $h_i(t)$ is the hazard function for person i at time period t, h_0 is the baseline hazard, X\_{i1} ,X\_{i2} , ... X\_{in} is a set of independent variables (predictor variables) for person i and $𝛽_0$ are the regression coefficients for the independent variables \[2\].
+Where i= 1,2,..., n indexes patients, t represents time, $h_i(t)$ is the hazard function for person i at time period t, h_0 is the baseline hazard, $X_{i1}$ , $X_{i2}$ , ... $X_{in}$ is a set of independent variables (predictor variables) for person i and $𝛽_0$ are the regression coefficients for the independent variables \[2\]. Said another way, with the use of th analysis this paper focuses on as example, the hazard of death for being accepted as a heart transplant candidate is equal to the "normal" hazard of death multiplied by an exponential. That exponential is a linear combination of the predictor variables. The Cox PH model then fits the regression coefficients $\beta$s in accordance with the data.
 
 Linear regression model on the other hand is not a good fit for this type of data for the following reasons. Survival analysis has two unique characteristics that linear regression doesn't handle well, censoring and time to event outcomes. Censored data is assumed to be all completed under linear regression and that is not the case in survival analysis. Secondly, linear regression assumes a constant relationship between predictors and response variables. Survival data can exhibit hazard rates, which linear regression can not handle too well.
 
 The other survival analysis model that is often used is the Kaplan-Meier (KM) Survival Analysis. K-M survival analysis is best used to measure the fraction of subjects living for a certain amount of time after treatment \[3\]. Censored observations don't hinder the K-M analysis similarly to Cox PMH. The one thing that Cox PMH can do that K-M analysis cannot is performing multivariate analysis by assessing the simultaneous effects of multiple predictor variables on survival outcomes (such as what we are doing with our data), because of this K-M analysis is considered univariate analysis \[4\].
 
-Data for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates \[5\]. These continuing candidates contribute to the censoring data.
+Dividing both sides by the baseline hazard yields the hazard ratio.
 
-The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior and transplant. Accepted year was the year the patient was included as an official candidate in the experiment and in the data these values are stored under "acceptyear". Their age when accepted in the study is labeled "age". Third predictor is whether or not the patient had prior surgeries with the header "prior". Finally, transplant status, if the patient received the heart transplant or not stored under the column name "transplant". The criteria (y variable) are survival status weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant is labeled "survtime".
+$$
+h(t)/h_0(t)= exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
+$$
 
-Variables within the data set such as, the columns: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns. A model was generated without the variable wait time due to the fact that only patients who received the transplant had a wait time. In order to include more patients (n=103) into the model, wait time was not chosen as a predictor variable.
+Taking the natural log yields a formula that has some similarity to linear regression. The log of the hazard ratio has a linear relationship to the predictor variables.
 
-The data was categorized into under 40, 40-50, and 50 and over, a histogram was generated $\textbf Image 2$ shows from one age category to another a patient is twice as likely to die. This does not include accounting for if you get a transplant or not. Being in need of a transplant, in addition to going from one age group to another the risk of dying is doubled. Two Cox proportional hazard models (PHM) are used in order to stratify the data on the transplant variable. One Cox PHM for those who receive the transplant and one for those who do not. When the data is stratified by transplant status, non-proportionality is better visualized as seen in $\textbf Image 1$, those that do not have the transplant die off at a much steeper rate than those that do have transplant. Image 1 Survival rate with Transplant and without Transplant Image 2 Risk of dying due to age group.
+$$
+ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
+$$
 
-$\textbf Image 1$ Survival rate with Transplant and without Transplant
+#### Data Examination and Transformation
+
+Data \[5\] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates \[6\]. These continuing candidates contribute to the censoring data.
+
+The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior, and transplant. Accepted year was the year the patient was accepted as a heart transplant candidate and in the data these values are stored under "acceptyear". Their age when accepted in the study is labeled "age". Third predictor is whether or not the patient had prior surgeries with the header "prior". Finally, transplant status, if the patient received the heart transplant or not, stored under the column name "transplant". The criteria (y variable) are survival status "survived" weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant, labeled "survtime".
+
+Variables within the data set such as: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code for data conversion"
+#| output: false
 heart_transplant <- read.csv("./heart_transplant.csv")
 #generate numeric columns for survived, prior, and transplant from existing charachter columns
 heart_transplant$survived2 <- as.numeric(ifelse(heart_transplant$survived=="dead",1,0))
 heart_transplant$prior2 <- as.numeric(ifelse(heart_transplant$prior=="yes",1,0))
 heart_transplant$transplant2 <- as.numeric(ifelse(heart_transplant$transplant=="treatment",1,0))
-all_strTrtmnt.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + strata(transplant2), data=heart_transplant)
-summary(all_strTrtmnt.mod)
+attach(heart_transplant)
 ```
+
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the histograms"
+#examine variables more
+par(mfrow=c(2,2))
+hist(age, xlab="Age (years)")
+hist(acceptyear, xlab="Year 19XX")
+hist(survtime, xlab="Survivial time (days)")
+hist(wait, xlab="Waittime for transplant (days)")
+hist(survived2, xlab="Survival Status (0-dead 1-alive)")
+hist(prior2, xlab="Prior Surgery (0-no 1-yes)")
+hist(transplant2, xlab="Transplant Status (0-control-no 1-transplant)")
+par(mfrow=c(1,1))
+```
+
+#### Model generation
+
+The first model was generated without the variable wait time due to the fact that only patients who received the transplant (n=67) had a wait time and those patients in the control do not. In order to include more patients (n=99) into the model, wait time was not chosen as a predictor variable in this first model.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the first model"
+#generate model without wait time
+#wait time is only available for those who received transplant not the control group
+all.mod <- coxph(Surv(survtime, survived2)~ acceptyear + age + prior2 + transplant2)
+```
+
+A second model was generated that examined those who do receive the transplant, to determine if wait (waiting time for transplant) was a significant indicator of patients survival status.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the second model"
+#generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant
+treated.mod <- coxph(Surv(survtime, survived2)~ acceptyear + age + prior2 + wait)
+```
+
+A third model was generated, in similar fashion to the first but this model did not include the variable of accepted year. Models with and without the variable for accepted year were compared based on their log likelihood. A high p value (p\>0.05) here would indicate there is not a statistically significant difference between the two models. Thus the variable acceptedyear could be dropped from the model without significantly affecting it.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the third model and anova test"
+#| output: false
+#generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model
+all2.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + transplant2)
+anova(all.mod, all2.mod, test="LRT")
+```
+
+#### Check Model Assumptions
+
+The cox proportional hazards model assumptions of linearity and proportional hazards were tested to ensure the data met those assumptions. The linearity assumption is assessed, similarly to how it is assessed in other models, with a plot of the residuals. Here the Martingale residuals were used. The relationship between the x variables and the log hazard should be linear. The Schoenfield test is used to check the proportional hazards assumption. The null hypothesis is the hazards are proportional. A high p value (\>0.05) here and we fail to reject the null hypothesis. The Schoenfield test results can also be plotted. Such plots show, if the hazard ratio were to change over time (is not proportional) what would its change look like. To confirm hazards are proportional using a plot of the Schoenfield test, one wants to see that Beta=0 falls within the confidence interval the majority if not all the time.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the test for linearity"
+#| output: false
+plot(predict(all2.mod), residuals(all2.mod, type="martingale"), xlab = "Predicted Values", ylab = "Martingale Residuals", main = "All2 Residual Plot",las=1)
+lines(smooth.spline(predict(all2.mod), residuals(all2.mod, type = "martingale")),col="red")
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the test for proportional hazards"
+#| output: false
+cox.zph(all2.mod)
+par(mfrow=c(1,3))
+plot(cox.zph(all2.mod)[1])
+abline(h=0, col=2)
+plot(cox.zph(all2.mod)[2])
+abline(h=0, col=2)
+plot(cox.zph(all2.mod)[3])
+abline(h=0, col=2)
+```
+
+#### Generating Additional Models
+
+A fourth model was generated. This one stratified the transplant status. When data does not meet the proportional hazards assumption one method for addressing that is stratification of the variable. This effectively categorizes the variable and creates separate models for each category rather than a single model. In this case two models, one for each status of the transplant variable (0-control-did not receive transplant and 1-treatment-did receive transplant).
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the fourth model"
+#Generate and examine transplant stratified models.
+all_strTrtmnt.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + strata(transplant2))
+```
+
+Lastly, the data was categorized by patient age, into under 40, 40-50, and 50+, a histogram was generated to examine the distribution. A fifth model was generated based on age as a category rather than a continuous value.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the age categorization"
+#| output: false
+#age categorization <40, 40-50, 50+
+detach(heart_transplant)
+heart_transplant$age2 <- as.numeric(ifelse(heart_transplant$age<41,0,ifelse(heart_transplant$age<51,1,2)))
+attach(heart_transplant)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the fifth model"
+#plot categorized age
+hist(age2, xlab="Age (<40, 40-49, 50+)")
+#generate model with chategorized age
+all_agechat.mod <- coxph(Surv(survtime, survived2)~ age2 + prior2 + strata(transplant2))
+```
+
+#### Estimate Survival Curve
+
+The advantage of the Cox PHM is that we do not need to know the baseline hazard $h_0(t)$. But, not knowing the baseline hazard means we can not say the hazard for the studied group. We can not know $h(t)$ if we do not know $h_0(t)$
+$$
+h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
+$$
+Without the baseline hazard $h_0(t)$ and the hazard of the studied group $h(t)$, the above can not be plotted in a plot know as a survival curve. However using mean values of the predictor variables a survival curve can be estimated.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code for the survival plot"
+#| output: false
 ggsurvplot(survfit(all_strTrtmnt.mod), data=heart_transplant, ggtheme = theme_minimal(), conf.int=TRUE, risk.table=TRUE, tables.height = 0.3, tables.theme = theme_minimal())
 ```
-
-
-```{r}
-heart_transplant$age2 <- as.numeric(ifelse(heart_transplant$age<41,0,ifelse(heart_transplant$age<51,1,2)))
-hist(heart_transplant$age2, xlab="Age (<40, 40-49, 50+)")
-
-#generate model with chategorized age
-all_agechat.mod <- coxph(Surv(survtime, survived2)~ age2 + prior2 + strata(transplant2), data=heart_transplant)
-summary(all_agechat.mod)
-
-```
-
-\[1\] A. N. Kulaylat and L. Tran, "Chapter 26- Regression Analysis ," in Translational surgery, Amsterdam : ELSEVIER ACADEMIC PRESS, 2023, pp. 157--163
-
-\[2\] S. Abd ElHafeez et al., "Methods to analyze time-to-event data: The Cox Regression Analysis," Oxidative medicine and cellular longevity, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8651375/ (accessed Oct. 20, 2023).
-
-\[3\] M. K. Goel, P. Khanna, and J. Kishore, "Understanding survival analysis: Kaplan-Meier estimate," International journal of Ayurveda research, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059453/#:\~:text=may%20become%20small.-, The%20Kaplan%2DMeier%20estimate%20is%20the%20simplest%20way%20of%20computing ,associated%20with%20subjects%20or%20situations.&text=For%20each%20time%20interval% 2C%20survival,number%20of%20patients%20at%20risk. (accessed Oct. 20, 2023).
-
-\[4\] W. N. Dudley, R. Wickham, and N. Coombs, "An introduction to survival statistics: Kaplan-Meier analysis," Journal of the advanced practitioner in oncology, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5045282/ (accessed Oct. 20, 2023).
-
-\[5\] Turnbull B, Brown B, and Hu M (1974). "Survivorship of heart transplant data." Journal of the American Statistical Association, vol. 69, pp. 74-80.
-
