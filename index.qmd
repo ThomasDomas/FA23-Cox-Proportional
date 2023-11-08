@@ -1,4 +1,4 @@
-# Cox Proportion Models {.unnumbered}
+# Cox Proportional Hazards Model {.unnumbered}
 
 Ivan B, Vladimir Dragomirov
 
@@ -9,5 +9,7 @@ Ivan B, Vladimir Dragomirov
 [Methods](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/methods.html)
 
 [Results](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/Results.html)
+
+Discussion - coming
 
 [References](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/references.html)
