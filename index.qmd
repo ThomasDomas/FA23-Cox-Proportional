@@ -1,6 +1,6 @@
 # Cox Proportional Hazards Model {.unnumbered}
 
-Ivan B, Vladimir Dragomirov
+Ivan Burgos, Vladimir Dragomirov
 
 [Introduction](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/intro.html)
 
