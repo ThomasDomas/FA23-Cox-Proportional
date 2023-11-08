@@ -8,6 +8,8 @@ Ivan Burgos, Vladimir Dragomirov
 
 [Methods](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/methods.html)
 
+[Methods2](https://thomasdomas.github.io/FA23-Cox-Proportional/methods.html "Methods2")
+
 [Results](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/Results.html)
 
 Discussion - coming
