@@ -2,3 +2,13 @@
 
 ::: {#refs}
 :::
+
+\[1\] A. N. Kulaylat and L. Tran, "Chapter 26- Regression Analysis ," in Translational surgery, Amsterdam : ELSEVIER ACADEMIC PRESS, 2023, pp. 157--163
+
+\[2\] S. Abd ElHafeez et al., "Methods to analyze time-to-event data: The Cox Regression Analysis," Oxidative medicine and cellular longevity, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8651375/ (accessed Oct. 20, 2023).
+
+\[3\] M. K. Goel, P. Khanna, and J. Kishore, "Understanding survival analysis: Kaplan-Meier estimate," International journal of Ayurveda research, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059453/#:\~:text=may%20become%20small.-, The%20Kaplan%2DMeier%20estimate%20is%20the%20simplest%20way%20of%20computing ,associated%20with%20subjects%20or%20situations.&text=For%20each%20time%20interval% 2C%20survival,number%20of%20patients%20at%20risk. (accessed Oct. 20, 2023).
+
+\[4\] W. N. Dudley, R. Wickham, and N. Coombs, "An introduction to survival statistics: Kaplan-Meier analysis," Journal of the advanced practitioner in oncology, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5045282/ (accessed Oct. 20, 2023).
+
+\[5\] Turnbull B, Brown B, and Hu M (1974). "Survivorship of heart transplant data." Journal of the American Statistical Association, vol. 69, pp. 74-80. https://www.openintro.org/data/index.php?data=heart_transplant

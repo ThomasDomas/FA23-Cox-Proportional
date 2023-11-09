@@ -134,7 +134,7 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 \]</span></p>
 <section id="data-examination-and-transformation" class="level4">
 <h4 class="anchored" data-anchor-id="data-examination-and-transformation">Data Examination and Transformation</h4>
-<p>Data [5] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates [6]. These continuing candidates contribute to the censoring data.</p>
+<p>Data [5] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates [5]. These continuing candidates contribute to the censoring data.</p>
 <p>The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior, and transplant. Accepted year was the year the patient was accepted as a heart transplant candidate and in the data these values are stored under “acceptyear”. Their age when accepted in the study is labeled “age”. Third predictor is whether or not the patient had prior surgeries with the header “prior”. Finally, transplant status, if the patient received the heart transplant or not, stored under the column name “transplant”. The criteria (y variable) are survival status “survived” weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant, labeled “survtime”.</p>
 <p>Variables within the data set such as: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns.</p>
 <div class="cell">
@@ -261,6 +261,77 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>all_agechat.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age2 <span class="sc">+</span> prior2 <span class="sc">+</span> <span class="fu">strata</span>(transplant2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Below is a table recapping which variables were included in which model. Each model was generated to address an issue with the previous model until the final 5th model.</p>
+<table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th style="text-align: center;">Model 1</th>
+<th style="text-align: center;">Model 2</th>
+<th style="text-align: center;">Model 3</th>
+<th style="text-align: center;">Model 4</th>
+<th style="text-align: center;">Model 5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">n=99</td>
+<td style="text-align: center;">n=67</td>
+<td style="text-align: center;">n=99</td>
+<td style="text-align: center;">n=99</td>
+<td style="text-align: center;">n=99</td>
+</tr>
+<tr class="even">
+<td>Accepted Year</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td>Age</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">Categorized</td>
+</tr>
+<tr class="even">
+<td>Prior Surgery</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td>Transplant</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">Stratified</td>
+<td style="text-align: center;">Stratified</td>
+</tr>
+<tr class="even">
+<td>Wait time</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="estimate-survival-curve" class="level4">
 <h4 class="anchored" data-anchor-id="estimate-survival-curve">Estimate Survival Curve</h4>

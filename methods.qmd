@@ -38,7 +38,7 @@ $$
 
 #### Data Examination and Transformation
 
-Data \[5\] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates \[6\]. These continuing candidates contribute to the censoring data.
+Data \[5\] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates \[5\]. These continuing candidates contribute to the censoring data.
 
 The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior, and transplant. Accepted year was the year the patient was accepted as a heart transplant candidate and in the data these values are stored under "acceptyear". Their age when accepted in the study is labeled "age". Third predictor is whether or not the patient had prior surgeries with the header "prior". Finally, transplant status, if the patient received the heart transplant or not, stored under the column name "transplant". The criteria (y variable) are survival status "survived" weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant, labeled "survtime".
 
@@ -161,13 +161,22 @@ hist(age2, xlab="Age (<40, 40-49, 50+)")
 all_agechat.mod <- coxph(Surv(survtime, survived2)~ age2 + prior2 + strata(transplant2))
 ```
 
+Below is a table recapping which variables were included in which model. Each model was generated to address an issue with the previous model until the final 5th model.
+
+| Variable      | Model 1 | Model 2 | Model 3 |  Model 4   |   Model 5   |
+|---------------|:-------:|:-------:|:-------:|:----------:|:-----------:|
+|               |  n=99   |  n=67   |  n=99   |    n=99    |    n=99     |
+| Accepted Year |    X    |    X    |         |            |             |
+| Age           |    X    |    X    |    X    |     X      | Categorized |
+| Prior Surgery |    X    |    X    |    X    |     X      |      X      |
+| Transplant    |    X    |    X    |    X    | Stratified | Stratified  |
+| Wait time     |         |    X    |         |            |             |
+
 #### Estimate Survival Curve
 
-The advantage of the Cox PHM is that we do not need to know the baseline hazard $h_0(t)$. But, not knowing the baseline hazard means we can not say the hazard for the studied group. We can not know $h(t)$ if we do not know $h_0(t)$
-$$
+The advantage of the Cox PHM is that we do not need to know the baseline hazard $h_0(t)$. But, not knowing the baseline hazard means we can not say the hazard for the studied group. We can not know $h(t)$ if we do not know $h_0(t)$ $$
 h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
-$$
-Without the baseline hazard $h_0(t)$ and the hazard of the studied group $h(t)$, the above can not be plotted in a plot know as a survival curve. However using mean values of the predictor variables a survival curve can be estimated.
+$$ Without the baseline hazard $h_0(t)$ and the hazard of the studied group $h(t)$, the above can not be plotted in a plot know as a survival curve. However using mean values of the predictor variables a survival curve can be estimated.
 
 ```{r}
 #| code-fold: true
