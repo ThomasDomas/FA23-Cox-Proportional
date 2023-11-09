@@ -188,7 +188,7 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 <div class="cell">
 <details>
 <summary>Show the code for the second model</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>treated.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> acceptyear <span class="sc">+</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> wait)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
@@ -196,7 +196,7 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 <div class="cell">
 <details>
 <summary>Show the code for the third model and anova test</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>all2.mod <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(survtime, survived2)<span class="sc">~</span> age <span class="sc">+</span> prior2 <span class="sc">+</span> transplant2)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -208,7 +208,7 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 <div class="cell">
 <details>
 <summary>Show the code for the test for linearity</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type=</span><span class="st">"martingale"</span>), <span class="at">xlab =</span> <span class="st">"Predicted Values"</span>, <span class="at">ylab =</span> <span class="st">"Martingale Residuals"</span>, <span class="at">main =</span> <span class="st">"All2 Residual Plot"</span>,<span class="at">las=</span><span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type=</span><span class="st">"martingale"</span>), <span class="at">xlab =</span> <span class="st">"Predicted Values"</span>, <span class="at">ylab =</span> <span class="st">"Martingale Residuals"</span>, <span class="at">main =</span> <span class="st">"All2 Residual Plot"</span>,<span class="at">las=</span><span class="dv">1</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">smooth.spline</span>(<span class="fu">predict</span>(all2.mod), <span class="fu">residuals</span>(all2.mod, <span class="at">type =</span> <span class="st">"martingale"</span>)),<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
@@ -341,7 +341,7 @@ h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
 <div class="cell">
 <details>
 <summary>Show the code for the survival plot</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(all_strTrtmnt.mod), <span class="at">data=</span>heart_transplant, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(), <span class="at">conf.int=</span><span class="cn">TRUE</span>, <span class="at">risk.table=</span><span class="cn">TRUE</span>, <span class="at">tables.height =</span> <span class="fl">0.3</span>, <span class="at">tables.theme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(all_strTrtmnt.mod), <span class="at">data=</span>heart_transplant, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(), <span class="at">conf.int=</span><span class="cn">TRUE</span>, <span class="at">risk.table=</span><span class="cn">TRUE</span>, <span class="at">tables.height =</span> <span class="fl">0.3</span>, <span class="at">tables.theme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

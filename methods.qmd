@@ -88,6 +88,7 @@ A second model was generated that examined those who do receive the transplant, 
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code for the second model"
+#| code-overflow: wrap
 #generate model with wait time to see if wait time is significant for those who do receive the transplant, only looks at records that received the transplant not the control who did not receive transplant
 treated.mod <- coxph(Surv(survtime, survived2)~ acceptyear + age + prior2 + wait)
 ```
@@ -98,6 +99,7 @@ A third model was generated, in similar fashion to the first but this model did 
 #| code-fold: true
 #| code-summary: "Show the code for the third model and anova test"
 #| output: false
+#| code-overflow: wrap
 #generate model without accepted year to compare and determine if removing the accepted year variable has any significant affect on the model
 all2.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + transplant2)
 anova(all.mod, all2.mod, test="LRT")
@@ -111,6 +113,7 @@ The cox proportional hazards model assumptions of linearity and proportional haz
 #| code-fold: true
 #| code-summary: "Show the code for the test for linearity"
 #| output: false
+#| code-overflow: wrap
 plot(predict(all2.mod), residuals(all2.mod, type="martingale"), xlab = "Predicted Values", ylab = "Martingale Residuals", main = "All2 Residual Plot",las=1)
 lines(smooth.spline(predict(all2.mod), residuals(all2.mod, type = "martingale")),col="red")
 ```
@@ -182,5 +185,6 @@ $$ Without the baseline hazard $h_0(t)$ and the hazard of the studied group $h(t
 #| code-fold: true
 #| code-summary: "Show the code for the survival plot"
 #| output: false
+#| code-overflow: wrap
 ggsurvplot(survfit(all_strTrtmnt.mod), data=heart_transplant, ggtheme = theme_minimal(), conf.int=TRUE, risk.table=TRUE, tables.height = 0.3, tables.theme = theme_minimal())
 ```
