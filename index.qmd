@@ -2,18 +2,10 @@
 
 Ivan Burgos, Vladimir Dragomirov
 
-[Introduction](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/intro.html)
+[Introduction](https://thomasdomas.github.io/FA23-Cox-Proportional/intro.html "Introduction2")
 
-[Introduction2](https://thomasdomas.github.io/FA23-Cox-Proportional/intro.html "Introduction2")
+[Methods](https://thomasdomas.github.io/FA23-Cox-Proportional/methods.html "Methods2")
 
-[Methods](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/methods.html)
+[Results](https://thomasdomas.github.io/FA23-Cox-Proportional/Results_and_Discussion_3.html "Results")
 
-[Methods2](https://thomasdomas.github.io/FA23-Cox-Proportional/methods.html "Methods2")
-
-[Results](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/Results.html)
-
-[Results2](https://thomasdomas.github.io/FA23-Cox-Proportional/Results.html "Results2")
-
-[References](file:///C:/Users/domastray.5/OneDrive%20-%20University%20of%20Florida/Documents/FA23-Cox-Proportional/docs/references.html)
-
-[References2](https://thomasdomas.github.io/FA23-Cox-Proportional/references.html "References2")
+[References](https://thomasdomas.github.io/FA23-Cox-Proportional/references.html "References")
