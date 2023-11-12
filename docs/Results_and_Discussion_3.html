@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Results_and_Discussion_3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>In Image 2 categories patients under 40, between 40-50 and over 50 years old and a hazard ratio of 2.08. From one category to the next this tells us you are twice as likely to die. Not accounting for if you get the transplant or not.</p>
+<p>In Image 2, age2 categories patients under 40, between 40-50, and over 50 years old. The subsequent model gives a hazard ratio of 2.08. From one category to the next this tells us you are twice as likely to die. Not accounting for if you get the transplant or not.</p>
 </section>
 <section id="image-2" class="level5">
 <h5 class="anchored" data-anchor-id="image-2">Image 2</h5>
@@ -277,6 +277,15 @@ Likelihood ratio test= 47.31  on 3 df,   p=3e-10
 Wald test            = 48.37  on 3 df,   p=2e-10
 Score (logrank) test = 55.28  on 3 df,   p=6e-12</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(survtime, survived2)
+ Model 1: ~ acceptyear + age + prior2 + transplant2
+ Model 2: ~ age + prior2 + transplant2
+   loglik  Chisq Df Pr(&gt;|Chi|)
+1 -255.49                     
+2 -256.28 1.5784  1      0.209</code></pre>
+</div>
 </div>
 <p>The C-statistic for the model without an accepted year is equal to 0.739 (<strong>see Table 3</strong>). Which shows that this model has a higher predictability capabilities compared to the model including the accepted year with a C-statistic = 0.683.</p>
 </section>
@@ -315,8 +324,8 @@ Score (logrank) test = 55.28  on 3 df,   p=6e-12</code></pre>
 <section id="table-1" class="level2">
 <h2 class="anchored" data-anchor-id="table-1">Table <strong>1:</strong></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Image 1 summary all.mod</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Image 1 summary all.mod</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
@@ -348,8 +357,8 @@ Score (logrank) test = 55.91  on 4 df,   p=2e-11</code></pre>
 <section id="table-2" class="level2">
 <h2 class="anchored" data-anchor-id="table-2">Table 2:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Image 2 summary examine model</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treated.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Image 2 summary examine model</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treated.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(survtime, survived2) ~ acceptyear + age + 
@@ -382,8 +391,8 @@ Score (logrank) test = 13.19  on 4 df,   p=0.01</code></pre>
 <section id="table-3" class="level2">
 <h2 class="anchored" data-anchor-id="table-3">Table 3:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#examine model without accepted year </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all2.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#examine model without accepted year </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all2.mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(survtime, survived2) ~ age + prior2 + transplant2)
@@ -412,9 +421,9 @@ Score (logrank) test = 55.28  on 3 df,   p=6e-12</code></pre>
 <section id="table-4" class="level2">
 <h2 class="anchored" data-anchor-id="table-4">Table 4:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compare model that includes acceptedyear and that does not</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#high p value, there is not a statistically significant difference between the two models, can drop the variable</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compare model that includes acceptedyear and that does not</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#high p value, there is not a statistically significant difference between the two models, can drop the variable</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(all.mod, all2.mod, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table
  Cox model: response is  Surv(survtime, survived2)

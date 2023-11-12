@@ -50,7 +50,7 @@ all_strTrtmnt.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + strata(tran
 ggsurvplot(survfit(all_strTrtmnt.mod), data=heart_transplant, ggtheme = theme_minimal(), conf.int=TRUE, risk.table=TRUE, tables.height = 0.3, tables.theme = theme_minimal())
 ```
 
-In Image 2 categories patients under 40, between 40-50 and over 50 years old and a hazard ratio of 2.08. From one category to the next this tells us you are twice as likely to die. Not accounting for if you get the transplant or not.
+In Image 2, age2 categories patients under 40, between 40-50, and over 50 years old. The subsequent model gives a hazard ratio of 2.08. From one category to the next this tells us you are twice as likely to die. Not accounting for if you get the transplant or not.
 
 ##### Image 2
 
@@ -93,6 +93,10 @@ all2.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + transplant2)
 
 #examine model
 summary(all2.mod)
+
+#compare model that includes acceptedyear and that does not
+#high p value, there is not a statistically significant difference between the two models, can drop the variable
+anova(all.mod, all2.mod, test="LRT")
 ```
 
 The C-statistic for the model without an accepted year is equal to 0.739 (**see Table 3**). Which shows that this model has a higher predictability capabilities compared to the model including the accepted year with a C-statistic = 0.683.
