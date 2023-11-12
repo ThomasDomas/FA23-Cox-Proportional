@@ -3,6 +3,7 @@ title: "Results and Discussion"
 ---
 
 ```{r}
+#| output: false
 #loading the needed libraries 
 library(survival)
 library(survminer)
@@ -19,6 +20,8 @@ summary(heart_transplant)
 ```
 
 ```{r}
+#| output: false
+#| echo: false
 #generate numeric columns for survived, prior, and transplant from existing charachter columns
 heart_transplant$survived2 <- as.numeric(
 ifelse(heart_transplant$survived=="dead",2,1))
