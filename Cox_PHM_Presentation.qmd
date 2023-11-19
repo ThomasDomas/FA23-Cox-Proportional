@@ -18,7 +18,7 @@ format: revealjs
 
 ## Prior to Cox PH Model
 
-**Log Rank Test** - compare groups, testing a null hypothesis that there is no difference between groups. Limitations: ability to handle multiple variables, abilit to quantify a difference between groups
+**Log Rank Test** - compares groups, testing a null hypothesis that there is no difference between groups. Limitations: ability to handle multiple variables, abilit to quantify a difference between groups
 
 **Kaplan-Meier Survival Curve** - very simple to implement, graphs how many are alive in each group at what time. Limitations: ability to handle more than a few varieables and any non-categorical variables, no mathematical function to describe the data, can not estimate a ratio of the hazards between groups,
 
@@ -68,21 +68,27 @@ $$
 ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 $$
 
-##  {.scrollable}
+## Cox PHM Assumptions -  Assumptions in common with many other models  {.smaller}
 
-##notes for slides
+**Linearity** - model assumes the log of the hazard ratio is linearly proportional to the predictor variables. Check for this with plot of residuals, similar to how other models check for this. The methods for handling data that violates this assumption is same as it is for other forms of regression
 
--   Intro
+**Observations are independent** - the survival of one person is independent of the survival of another person. Example of when this may be more of an issue, less common hereditary health conditions, study participants may be related.
 
-    -   Cox PH
+**Censoring is non-informative** - those that are censored, example leave the study, are just as likely to experience the event, example death, as those that finish the study.
 
-        -   maths
+## Cox PHM Assumptions - more specific to this model  {.smaller}
 
-        -   assumptions
+**Proportional Hazards** - model assumes the hazards are proportional.
 
-        -   limitations - extensions
+-   check this with Schoenffieldt test
 
-        -   use areas
+-   handle violations with: stratification (we will see this in our example), or introduce time dependent parameters "(x\*t)" instead of simply "x"
+
+**Independent variables are not changed over time** - example people moved from one cohort of the study to another, dosage changes. If this occurs, need an extension of the Cox PHM that allows for time-dependent covariates.
+
+## Data set used for our study
+
+## ##notes for slides  {.scrollable}
 
 -   Methods
 
