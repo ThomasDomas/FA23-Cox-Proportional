@@ -1,5 +1,5 @@
 project:
-  type: website
+  type: book
   output-dir: docs
 
 book:
@@ -10,8 +10,7 @@ book:
     - index.qmd
     - intro.qmd
     - methods.qmd
-    - Results.qmd
-    - summary.qmd
+    - Results_and_Discussion_3.qmd
     - references.qmd
 
 bibliography: references.bib
