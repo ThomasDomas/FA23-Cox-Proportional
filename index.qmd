@@ -1,11 +1,3 @@
 # Cox Proportional Hazards Model {.unnumbered}
 
-Ivan Burgos, Vladimir Dragomirov
-
-[Introduction](https://thomasdomas.github.io/FA23-Cox-Proportional/intro.html "Introduction2")
-
-[Methods](https://thomasdomas.github.io/FA23-Cox-Proportional/methods.html "Methods2")
-
-[Results](https://thomasdomas.github.io/FA23-Cox-Proportional/Results_and_Discussion_3.html "Results")
-
-[References](https://thomasdomas.github.io/FA23-Cox-Proportional/references.html "References")
+Review of the model and an example of its use to analyze data on survival of patients who receive heart transplant vs those who are candidates for the treatment but do not receive it.
