@@ -349,7 +349,7 @@ Ivan Burgos, Vladimir Dragomirov
 </section>
 <section id="prior-to-cox-ph-model" class="slide level2">
 <h2>Prior to Cox PH Model</h2>
-<p><strong>Log Rank Test</strong> - compare groups, testing a null hypothesis that there is no difference between groups. Limitations: ability to handle multiple variables, abilit to quantify a difference between groups</p>
+<p><strong>Log Rank Test</strong> - compares groups, testing a null hypothesis that there is no difference between groups. Limitations: ability to handle multiple variables, abilit to quantify a difference between groups</p>
 <p><strong>Kaplan-Meier Survival Curve</strong> - very simple to implement, graphs how many are alive in each group at what time. Limitations: ability to handle more than a few varieables and any non-categorical variables, no mathematical function to describe the data, can not estimate a ratio of the hazards between groups,</p>
 </section>
 <section id="example-kaplan-meier-survival-curve" class="slide level2">
@@ -376,20 +376,27 @@ h(t)/h_0(t)= exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
 ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 \]</span></p>
 </section>
-<section id="section" class="slide level2 scrollable">
-<h2></h2>
-<p>##notes for slides</p>
+<section id="cox-phm-assumptions---assumptions-in-common-with-many-other-models" class="slide level2 smaller">
+<h2>Cox PHM Assumptions - Assumptions in common with many other models</h2>
+<p><strong>Linearity</strong> - model assumes the log of the hazard ratio is linearly proportional to the predictor variables. Check for this with plot of residuals, similar to how other models check for this. The methods for handling data that violates this assumption is same as it is for other forms of regression</p>
+<p><strong>Observations are independent</strong> - the survival of one person is independent of the survival of another person. Example of when this may be more of an issue, less common hereditary health conditions, study participants may be related.</p>
+<p><strong>Censoring is non-informative</strong> - those that are censored, example leave the study, are just as likely to experience the event, example death, as those that finish the study.</p>
+</section>
+<section id="cox-phm-assumptions---more-specific-to-this-model" class="slide level2 smaller">
+<h2>Cox PHM Assumptions - more specific to this model</h2>
+<p><strong>Proportional Hazards</strong> - model assumes the hazards are proportional.</p>
 <ul>
-<li><p>Intro</p>
+<li><p>check this with Schoenffieldt test</p></li>
+<li><p>handle violations with: stratification (we will see this in our example), or introduce time dependent parameters “(x*t)” instead of simply “x”</p></li>
+</ul>
+<p><strong>Independent variables are not changed over time</strong> - example people moved from one cohort of the study to another, dosage changes. If this occurs, need an extension of the Cox PHM that allows for time-dependent covariates.</p>
+</section>
+<section id="data-set-used-for-our-study" class="slide level2">
+<h2>Data set used for our study</h2>
+</section>
+<section id="notes-for-slides" class="slide level2 scrollable">
+<h2>##notes for slides</h2>
 <ul>
-<li><p>Cox PH</p>
-<ul>
-<li><p>maths</p></li>
-<li><p>assumptions</p></li>
-<li><p>limitations - extensions</p></li>
-<li><p>use areas</p></li>
-</ul></li>
-</ul></li>
 <li><p>Methods</p>
 <ul>
 <li><p>dataset</p></li>
