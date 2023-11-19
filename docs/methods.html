@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>methods</title>
+<title>FA23-Cox Proportional - 2&nbsp; Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,11 +58,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Results_and_Discussion_3.html" rel="next">
+<link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,25 +100,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body>
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./methods.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">FA23-Cox Proportional</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cox Proportional Hazards Model</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./methods.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Results_and_Discussion_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Results and Discussion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="methods.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cox-proportional-hazard-model" id="toc-cox-proportional-hazard-model" class="nav-link active" data-scroll-target="#cox-proportional-hazard-model"><span class="header-section-number">2.1</span> Cox Proportional Hazard Model</a></li>
+  <li><a href="#data-examination-and-transformation" id="toc-data-examination-and-transformation" class="nav-link" data-scroll-target="#data-examination-and-transformation"><span class="header-section-number">2.2</span> Data Examination and Transformation</a></li>
+  <li><a href="#model-generation" id="toc-model-generation" class="nav-link" data-scroll-target="#model-generation"><span class="header-section-number">2.3</span> Model generation</a></li>
+  <li><a href="#check-model-assumptions" id="toc-check-model-assumptions" class="nav-link" data-scroll-target="#check-model-assumptions"><span class="header-section-number">2.4</span> Check Model Assumptions</a></li>
+  <li><a href="#generating-additional-models" id="toc-generating-additional-models" class="nav-link" data-scroll-target="#generating-additional-models"><span class="header-section-number">2.5</span> Generating Additional Models</a></li>
+  <li><a href="#estimate-survival-curve" id="toc-estimate-survival-curve" class="nav-link" data-scroll-target="#estimate-survival-curve"><span class="header-section-number">2.6</span> Estimate Survival Curve</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></h1>
+</div>
 
 
-<section id="method-cox-regression" class="level1">
-<h1>Method: Cox regression</h1>
-<section id="methods" class="level2">
-<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="cox-proportional-hazard-model" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="cox-proportional-hazard-model"><span class="header-section-number">2.1</span> Cox Proportional Hazard Model</h2>
 <p>The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable <span class="math inline">\(x_i\)</span> . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g.&nbsp;death in most survival analysis) [1]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.</p>
 <p>The Cox regression model is based on the hazard function. Mathematically written as :</p>
 <p><span class="math display">\[
@@ -132,8 +221,9 @@ h(t)/h_0(t)= exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
 <p><span class="math display">\[
 ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 \]</span></p>
-<section id="data-examination-and-transformation" class="level4">
-<h4 class="anchored" data-anchor-id="data-examination-and-transformation">Data Examination and Transformation</h4>
+</section>
+<section id="data-examination-and-transformation" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="data-examination-and-transformation"><span class="header-section-number">2.2</span> Data Examination and Transformation</h2>
 <p>Data [5] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates [5]. These continuing candidates contribute to the censoring data.</p>
 <p>The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior, and transplant. Accepted year was the year the patient was accepted as a heart transplant candidate and in the data these values are stored under “acceptyear”. Their age when accepted in the study is labeled “age”. Third predictor is whether or not the patient had prior surgeries with the header “prior”. Finally, transplant status, if the patient received the heart transplant or not, stored under the column name “transplant”. The criteria (y variable) are survival status “survived” weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant, labeled “survtime”.</p>
 <p>Variables within the data set such as: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns.</p>
@@ -173,8 +263,8 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 </div>
 </div>
 </section>
-<section id="model-generation" class="level4">
-<h4 class="anchored" data-anchor-id="model-generation">Model generation</h4>
+<section id="model-generation" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="model-generation"><span class="header-section-number">2.3</span> Model generation</h2>
 <p>The first model was generated without the variable wait time due to the fact that only patients who received the transplant (n=67) had a wait time and those patients in the control do not. In order to include more patients (n=99) into the model, wait time was not chosen as a predictor variable in this first model.</p>
 <div class="cell">
 <details>
@@ -202,8 +292,8 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 </details>
 </div>
 </section>
-<section id="check-model-assumptions" class="level4">
-<h4 class="anchored" data-anchor-id="check-model-assumptions">Check Model Assumptions</h4>
+<section id="check-model-assumptions" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="check-model-assumptions"><span class="header-section-number">2.4</span> Check Model Assumptions</h2>
 <p>The cox proportional hazards model assumptions of linearity and proportional hazards were tested to ensure the data met those assumptions. The linearity assumption is assessed, similarly to how it is assessed in other models, with a plot of the residuals. Here the Martingale residuals were used. The relationship between the x variables and the log hazard should be linear. The Schoenfield test is used to check the proportional hazards assumption. The null hypothesis is the hazards are proportional. A high p value (&gt;0.05) here and we fail to reject the null hypothesis. The Schoenfield test results can also be plotted. Such plots show, if the hazard ratio were to change over time (is not proportional) what would its change look like. To confirm hazards are proportional using a plot of the Schoenfield test, one wants to see that Beta=0 falls within the confidence interval the majority if not all the time.</p>
 <div class="cell">
 <details>
@@ -226,8 +316,8 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 </details>
 </div>
 </section>
-<section id="generating-additional-models" class="level4">
-<h4 class="anchored" data-anchor-id="generating-additional-models">Generating Additional Models</h4>
+<section id="generating-additional-models" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="generating-additional-models"><span class="header-section-number">2.5</span> Generating Additional Models</h2>
 <p>A fourth model was generated. This one stratified the transplant status. When data does not meet the proportional hazards assumption one method for addressing that is stratification of the variable. This effectively categorizes the variable and creates separate models for each category rather than a single model. In this case two models, one for each status of the transplant variable (0-control-did not receive transplant and 1-treatment-did receive transplant).</p>
 <div class="cell">
 <details>
@@ -333,8 +423,8 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 </tbody>
 </table>
 </section>
-<section id="estimate-survival-curve" class="level4">
-<h4 class="anchored" data-anchor-id="estimate-survival-curve">Estimate Survival Curve</h4>
+<section id="estimate-survival-curve" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="estimate-survival-curve"><span class="header-section-number">2.6</span> Estimate Survival Curve</h2>
 <p>The advantage of the Cox PHM is that we do not need to know the baseline hazard <span class="math inline">\(h_0(t)\)</span>. But, not knowing the baseline hazard means we can not say the hazard for the studied group. We can not know <span class="math inline">\(h(t)\)</span> if we do not know <span class="math inline">\(h_0(t)\)</span> <span class="math display">\[
 h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
 \]</span> Without the baseline hazard <span class="math inline">\(h_0(t)\)</span> and the hazard of the studied group <span class="math inline">\(h(t)\)</span>, the above can not be plotted in a plot know as a survival curve. However using mean values of the predictor variables a survival curve can be estimated.</p>
@@ -346,8 +436,6 @@ h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
 </div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -584,6 +672,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Results_and_Discussion_3.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Results and Discussion</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

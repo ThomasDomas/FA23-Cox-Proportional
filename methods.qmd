@@ -1,4 +1,4 @@
-# Method: Cox regression
+# Methods
 
 ```{r}
 #| output: false
@@ -8,7 +8,7 @@ library(survival)
 library(survminer)
 ```
 
-## Methods
+## Cox Proportional Hazard Model
 
 The Cox Proportional Hazard Model (PHM) is best suited for this data due to the fact that this model is used to examine a time-to-event outcome, t, as a function of more than one predictor variable $x_i$ . What makes Cox PHM unique compared to other models is the fact that it adjusts for censoring. Censoring occurs when the exact time of exposure before an event is unknown. The three main reasons for censoring are: (1) a person does not experience the event before the end of the experiment; (2) a person does not check-in during study; or (3) a person withdraws from the experiment for reasons other than the event of interest (e.g. death in most survival analysis) \[1\]. A strength of the Cox PHM allows the inclusion of patients who have not had the event. Information is still provided by the patient up to the time of censoring, which informs the overall time to events in the population.
 
@@ -36,7 +36,7 @@ $$
 ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 $$
 
-#### Data Examination and Transformation
+## Data Examination and Transformation
 
 Data \[5\] for our cox regression analysis comes from the Stanford University Heart Transplant Study. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates \[5\]. These continuing candidates contribute to the censoring data.
 
@@ -71,7 +71,7 @@ hist(transplant2, xlab="Transplant Status (0-control-no 1-transplant)")
 par(mfrow=c(1,1))
 ```
 
-#### Model generation
+## Model generation
 
 The first model was generated without the variable wait time due to the fact that only patients who received the transplant (n=67) had a wait time and those patients in the control do not. In order to include more patients (n=99) into the model, wait time was not chosen as a predictor variable in this first model.
 
@@ -105,7 +105,7 @@ all2.mod <- coxph(Surv(survtime, survived2)~ age + prior2 + transplant2)
 anova(all.mod, all2.mod, test="LRT")
 ```
 
-#### Check Model Assumptions
+## Check Model Assumptions
 
 The cox proportional hazards model assumptions of linearity and proportional hazards were tested to ensure the data met those assumptions. The linearity assumption is assessed, similarly to how it is assessed in other models, with a plot of the residuals. Here the Martingale residuals were used. The relationship between the x variables and the log hazard should be linear. The Schoenfield test is used to check the proportional hazards assumption. The null hypothesis is the hazards are proportional. A high p value (\>0.05) here and we fail to reject the null hypothesis. The Schoenfield test results can also be plotted. Such plots show, if the hazard ratio were to change over time (is not proportional) what would its change look like. To confirm hazards are proportional using a plot of the Schoenfield test, one wants to see that Beta=0 falls within the confidence interval the majority if not all the time.
 
@@ -132,7 +132,7 @@ plot(cox.zph(all2.mod)[3])
 abline(h=0, col=2)
 ```
 
-#### Generating Additional Models
+## Generating Additional Models
 
 A fourth model was generated. This one stratified the transplant status. When data does not meet the proportional hazards assumption one method for addressing that is stratification of the variable. This effectively categorizes the variable and creates separate models for each category rather than a single model. In this case two models, one for each status of the transplant variable (0-control-did not receive transplant and 1-treatment-did receive transplant).
 
@@ -175,7 +175,7 @@ Below is a table recapping which variables were included in which model. Each mo
 | Transplant    |    X    |    X    |    X    | Stratified | Stratified  |
 | Wait time     |         |    X    |         |            |             |
 
-#### Estimate Survival Curve
+## Estimate Survival Curve
 
 The advantage of the Cox PHM is that we do not need to know the baseline hazard $h_0(t)$. But, not knowing the baseline hazard means we can not say the hazard for the studied group. We can not know $h(t)$ if we do not know $h_0(t)$ $$
 h(t) = h_0(t) exp (\beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n})
