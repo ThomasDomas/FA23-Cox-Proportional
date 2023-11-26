@@ -12,6 +12,7 @@ book:
     - methods.qmd
     - Results_and_Discussion_3.qmd
     - references.qmd
+    - Heart_transplant_coxph_v2.qmd
 
 bibliography: references.bib
 
