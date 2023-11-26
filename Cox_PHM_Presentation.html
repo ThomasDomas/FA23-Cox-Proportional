@@ -340,7 +340,7 @@ Ivan Burgos, Vladimir Dragomirov
 <h2>Cox Proportional Hazard Model</h2>
 <div>
 <ul>
-<li class="fragment"><p>Developed by Sir David R Cox, a british statistician, in 1972</p></li>
+<li class="fragment"><p>Developed by Sir David R Cox, a British statistician, in 1972</p></li>
 <li class="fragment"><p>Also called Cox Regression</p></li>
 <li class="fragment"><p>Used to investigate time to event data, e.g.&nbsp;time until patient dies, time until part malfunctions, time until decision is made, etc.</p></li>
 <li class="fragment"><p>The field of Survival Analysis works with a lot of time to event data, and makes a lot of use of the Cox Proportional Hazards Model and its extensions</p></li>
@@ -349,8 +349,8 @@ Ivan Burgos, Vladimir Dragomirov
 </section>
 <section id="prior-to-cox-ph-model" class="slide level2">
 <h2>Prior to Cox PH Model</h2>
-<p><strong>Log Rank Test</strong> - compares groups, testing a null hypothesis that there is no difference between groups. Limitations: ability to handle multiple variables, abilit to quantify a difference between groups</p>
-<p><strong>Kaplan-Meier Survival Curve</strong> - very simple to implement, graphs how many are alive in each group at what time. Limitations: ability to handle more than a few varieables and any non-categorical variables, no mathematical function to describe the data, can not estimate a ratio of the hazards between groups,</p>
+<p><strong>Log Rank Test</strong> - compares groups, testing a null hypothesis that there is no difference between groups. Limitations: ability to handle multiple variables, ability to quantify a difference between groups</p>
+<p><strong>Kaplan-Meier Survival Curve</strong> - very simple to implement, graphs how many are alive in each group at what time. Limitations: ability to handle more than a few variables and any non-categorical variables, no mathematical function to describe the data, can not estimate a ratio of the hazards between groups,</p>
 </section>
 <section id="example-kaplan-meier-survival-curve" class="slide level2">
 <h2>Example Kaplan-Meier Survival Curve</h2>
@@ -391,28 +391,207 @@ ln(h(t)/h_0(t))= \beta_1X_{1} + \beta_{2}X_{2} + \dots + \beta_n X_{n}
 </ul>
 <p><strong>Independent variables are not changed over time</strong> - example people moved from one cohort of the study to another, dosage changes. If this occurs, need an extension of the Cox PHM that allows for time-dependent covariates.</p>
 </section>
-<section id="data-set-used-for-our-study" class="slide level2">
-<h2>Data set used for our study</h2>
+<section id="methods" class="slide level2 scrollable">
+<h2>Methods</h2>
+<ol type="1">
+<li>Get familiar with the dataset.</li>
+<li>Create first model - uses all the patients but only the predictor variables that are available for all the patients.</li>
+<li>Create a second model - uses only the patients that received the heart transplant with the additional variable available for those patients. Does that variables inclusion improve the model?</li>
+<li>Create a third model - remove the variable that had the least significant p-value in the previous models.</li>
+<li>Compare the third and first model - to determine if indeed that variable can be dropped from the model.</li>
+<li>Check data set meets linearity and proportional hazards assumptions - implement any methods needed to resolve assumption violations.</li>
+<li>Create a fourth model that incorporates changes made to address assumption violations.</li>
+<li>Extra, create a fifth model that looks at age as a category (&lt;40, 40-50, 50+) vs a continuous variable.</li>
+</ol>
+<p>*Note. Methods and results were very iterative, the results of one model dictated what needed to be adjusted and that a revised model needed to be calculated.</p>
 </section>
-<section id="notes-for-slides" class="slide level2 scrollable">
-<h2>##notes for slides</h2>
+<section id="data-examination-and-transformation" class="slide level2 smaller scrollable">
+<h2>Data Examination and Transformation</h2>
+<div>
 <ul>
-<li><p>Methods</p>
-<ul>
-<li><p>dataset</p></li>
-<li><p>cleaning of data</p></li>
-<li><p>Methods and results more iterative:</p></li>
-</ul></li>
-<li><p>Results and Discussion</p>
-<ul>
-<li><p>first model</p></li>
-<li><p>second model</p></li>
-<li><p>third model</p></li>
-<li><p>fourth model</p></li>
-<li><p>fifth model</p></li>
-</ul></li>
-<li><p>Conclusion</p></li>
+<li class="fragment"><p>Data source: Stanford University Heart Transplant Study [1]</p></li>
+<li class="fragment"><p>Objective: To assess the potential increase in recipient lifespan through an experimental heart transplant program</p></li>
+<li class="fragment"><p>Patient inclusion criteria: Official heart transplant candidates with an illness requiring a heart transplant for life prolongation</p></li>
+<li class="fragment"><p>Timing of transplants: Occurrence varies from a few weeks to several months, contingent on donor heart availability</p></li>
+<li class="fragment"><p>Status of candidates: Some candidates may show improvement during the waiting period and may no longer qualify as heart transplant candidates but are retained in the dataset as continuing candidates [1]</p></li>
+<li class="fragment"><p>Contribution to analysis: Continuing candidates play a role in censoring data, impacting the study’s analysis and outcomes</p></li>
 </ul>
+</div>
+<p>::: {.content-hidden when -format=“realjs”} Data for our Cox regression analysis comes from the Stanford University Heart Transplant Study [1]. The study was conducted to determine if an experimental heart transplant program may increase the lifespan of the recipient. Each patient in the program is considered an official heart transplant candidate, meaning they have an illness that will most likely need a heart transplant in order to prolong their lives. Patients heart transplant occurs between a few weeks to several months which all depends on donor heart availability. Although few candidates during the waiting period show improvement and get deselected as heart transplant candidates, they are kept in the data as continuing candidates [1]. These continuing candidates contribute to the censoring data.</p>
+<p>The variables included in the Cox model as the x variable (or predictors) are accepted year, age, prior, and transplant. Accepted year was the year the patient was accepted as a heart transplant candidate and in the data these values are stored under “acceptyear”. Their age when accepted in the study is labeled “age”. Third predictor is whether or not the patient had prior surgeries with the header “prior”. Finally, transplant status, if the patient received the heart transplant or not, stored under the column name “transplant”. The criteria (y variable) are survival status “survived” weather they survived until the end of the experiment, and the number of days a patient lived for after receiving the transplant, labeled “survtime”. :::</p>
+<div>
+<ul>
+<li class="fragment"><p>Predictors (X variables) in the Cox model:</p>
+<ul>
+<li class="fragment"><p>Accepted year: Recorded as “acceptyear,” denoting the year a patient was accepted as a heart transplant candidate</p></li>
+<li class="fragment"><p>Age at acceptance: Identified as “age” in the dataset, indicating the patient’s age when accepted into the study</p></li>
+<li class="fragment"><p>Prior surgeries: Recorded under the header “prior,” indicating whether the patient had undergone prior surgeries</p></li>
+<li class="fragment"><p>Transplant status: Recorded as “transplant,” indicating whether the patient received a heart transplant</p></li>
+</ul></li>
+<li class="fragment"><p>Criteria (Y variables) for analysis:</p>
+<ul>
+<li class="fragment"><p>Survival status: Recorded as “survived,” denoting whether the patient survived until the conclusion of the experiment</p></li>
+<li class="fragment"><p>Survival duration: Labeled “survtime,” indicating the number of days a patient lived after receiving the transplant</p></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="data-prior-to-transformation" class="slide level2">
+<h2>Data prior to Transformation</h2>
+
+<img data-src="Head%20data%20set.png" width="580" class="r-stretch quarto-figure-center"><p class="caption">Table _: Summary of First 15 rows of Heart Transplant Dataset</p><div>
+<ul>
+<li class="fragment">Variables within the data set such as: survived, prior, and transplant needed to be converted from characteristic columns to numeric columns as can be seen in table _.</li>
+</ul>
+</div>
+</section>
+<section id="results" class="slide level2 scrollable">
+<h2>Results</h2>
+<p>At first, modifications were required for the dataset involving the columns labeled “survived,” “prior,” and “transplant.” Subsequently, after these modifications were made, the dataset became ready for the application of the Cox PH model. The ensuing results are as follows.</p>
+<h3 id="histogram-by-age-groups">Histogram by Age Groups</h3>
+<div>
+<ul>
+<li class="fragment"><p>Importance of age grouping:</p>
+<ul>
+<li class="fragment">Essential for a clearer visual representation of predominant age groups within the dataset</li>
+</ul></li>
+<li class="fragment"><p>Right-skewed Age Histogram:</p>
+<ul>
+<li class="fragment">Indicates a majority of study patients are over thirty years old</li>
+</ul></li>
+<li class="fragment"><p>Logic behind age distribution:</p>
+<ul>
+<li class="fragment">Correlates with the trend where individuals needing heart transplants typically have more heart wear</li>
+</ul></li>
+<li class="fragment"><p>Peak concentration of ages:</p>
+<ul>
+<li class="fragment">Highest concentration observed between 45 to 50 years old</li>
+</ul></li>
+</ul>
+</div>
+<p>Grouping patients by age was crucial to obtain a clearer visual depiction of the predominant age groups within the data. The Age Histogram exhibits a right-skewed distribution, indicating that a majority of the patients in the study are aged over thirty. This aligns logically with the fact that individuals requiring heart transplants tend to be those with more extensive wear on their hearts. The highest concentration of ages falls within the range of 45 to 50 years old.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Cox_PHM_Presentation_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</div>
+</div>
+<p>!Histogram by Age in Study</p>
+<h3 id="histogram-by-age-groups-1">Histogram by Age Groups</h3>
+<div>
+<ul>
+<li class="fragment"><p>Objective: Determine the most represented age group among study patients</p></li>
+<li class="fragment"><p>Initial histogram provided a general overview but lacked specificity</p></li>
+<li class="fragment"><p>Second histogram created to condense broader age ranges for better insight</p></li>
+<li class="fragment"><p>Observation from the initial histogram: Most represented age groups between 40s to mid-50s</p></li>
+<li class="fragment"><p>Categorization in the second histogram:</p>
+<ul>
+<li class="fragment">Patients grouped into three categories: 40 and under, between 40-49, and 50 and over</li>
+</ul></li>
+<li class="fragment"><p>Resultant finding:</p>
+<ul>
+<li class="fragment">A substantial majority of patients fall within the age bracket of 40-49</li>
+</ul></li>
+</ul>
+</div>
+<p>Next, we wanted to know which age group most represented the patients in the study. The first histogram gave us a general idea, but we wanted to narrow the age group. Another histogram was generated to consolidate broader age ranges. After observing the first histogram, it became evident that the most represented age groups were within the 40s to mid-50s range. Considering this distribution, the second histogram categorized patients into three groups: 40 and under, between 40-49, and 50 and over. The outcome demonstrates that a significant majority of patients in the study belong to the age bracket of 40-49.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Cox_PHM_Presentation_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</div>
+</div>
+<p>!Histogram by Age Range</p>
+<h3 id="survival-ship-curve">Survival ship Curve</h3>
+<div>
+<ul>
+<li class="fragment"><p>Aim: Graph survival probabilities of heart transplant recipients versus non-recipients</p></li>
+<li class="fragment"><p>Visualization: Created a survival plot to depict post-heart transplant survivorship</p></li>
+<li class="fragment"><p>Color representation: Teal for heart transplant recipients, red for non-recipients</p></li>
+<li class="fragment"><p>Study participants: 99 patients examined; 32 (32.32%) did not receive a transplant, while 67 (67.67%) did</p></li>
+<li class="fragment"><p>Initial 500 days’ outcome:</p>
+<ul>
+<li class="fragment"><p>Non-recipients: Only 1 patient survived (1.03% survivorship without transplant)</p></li>
+<li class="fragment"><p>Recipients: 22 patients survived (32.83% survivorship with transplant)</p></li>
+</ul></li>
+<li class="fragment"><p>Post-procedure survivorship:</p>
+<ul>
+<li class="fragment"><p>Study conducted during the 1960s and 1970s; survivorship seems lower than anticipated</p></li>
+<li class="fragment"><p>Analysis at 1500 days (4 years) post-surgery:</p>
+<ul>
+<li class="fragment"><p>Recipients: Only 3 patients survived among those who had a heart transplant</p></li>
+<li class="fragment"><p>Non-recipients: None of the 33 patients survived</p></li>
+</ul></li>
+<li class="fragment"><p>Note: Circumstances of patients’ deaths or their heart condition’s role in mortality remain unknown</p></li>
+</ul></li>
+</ul>
+</div>
+<p>Ultimately, our aim was to graph the survival probabilities of patients who underwent a heart transplant against those who did not. To illustrate the post-heart transplant survivorship, a survival plot was created. Patients who received a heart transplant were denoted in teal, whereas those who did not were indicated in red. Among the 99 patients studied, 32 (32.32%) did not receive a transplant, while 67 (67.67%) underwent this potentially life-saving procedure. Within the initial 500 days (approximately 1 year and 3 months), only 1 patient who did not receive a heart transplant remained alive, resulting in a survivorship rate without the transplant of 1.03%. Conversely, among those who received the transplant during the same timeframe, 22 patients remained alive, yielding a survivorship rate of 32.83%.</p>
+<p>Overall, the post-procedure survivorship appears lower than desired, but it’s crucial to consider that this study was conducted during the 1960s and 1970s. The statistical impact becomes more striking when examining patients 1500 days (or 4 years) post-surgery or without surgery. Only 3 patients who underwent a heart transplant and none of the 33 patients who did not receive the transplant were still alive. However, it’s essential to note that the circumstances surrounding the patients’ deaths or whether their heart condition contributed to their demise remain unknown.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Cox_PHM_Presentation_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</div>
+</div>
+<p>!Survival Plot Heart Transplant vs No Heart Transplant</p>
+</section>
+<section id="research-conclusion" class="slide level2 scrollable">
+<h2>Research Conclusion</h2>
+<div>
+<ul>
+<li class="fragment"><p>Heart transplantation significantly extends patients’ lives based on strong support from our study</p></li>
+<li class="fragment"><p>Data source: Stanford Heart Transplant Study; analyzed using a survival analysis tool, Cox Regression model</p></li>
+<li class="fragment"><p>Suitability of Cox Regression:</p>
+<ul>
+<li class="fragment">Ideal for time-to-event outcomes, comparing the life expectancy of patients with and without heart transplants</li>
+</ul></li>
+<li class="fragment"><p>Post-transplant longevity:</p>
+<ul>
+<li class="fragment">Some patients lived an additional 1-4 years post-transplant</li>
+</ul></li>
+</ul>
+</div>
+<div>
+<ul>
+<li class="fragment"><p>Model selection:</p>
+<div>
+<ul>
+<li class="fragment">Model 4 emerged as the most effective in supporting the data and generating visual representations</li>
+</ul>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="further-research-suggestions" class="slide level2 scrollable">
+<h2>Further Research Suggestions</h2>
+<div>
+<ul>
+<li class="fragment"><p>Focus on age groups’ survivability post-transplant for better insights into optimal candidates</p></li>
+<li class="fragment"><p>Allocation of donor organs: Explore which age groups benefit the most from a heart transplant for improved survival</p></li>
+<li class="fragment"><p>Considerations for further studies:</p>
+<ul>
+<li class="fragment"><p>Include more current data and expand sample size with additional covariates (e.g., race, sex)</p></li>
+<li class="fragment"><p>Investigate potential differences in outcomes across various surgery centers</p>
+<ul>
+<li class="fragment">Analyze statistical significance between hospitals regarding surgery outcome</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="contributions-and-implications" class="slide level2">
+<h2>Contributions and Implications</h2>
+<div>
+<ul>
+<li class="fragment"><p>Our research offers insights into the complex relationship among heart transplantation, age, and patient outcomes in cardiac healthcare</p></li>
+<li class="fragment"><p>Vital information for healthcare workers and patients to make informed decisions about organ allocation and patient survival</p></li>
+</ul>
+</div>
+<p>In conclusion, our research provides strong support that heart transplantation has a positive and significant impact on extending the lives of patients. The data was provided by Stanford Heart Transplant Study. With the help of a survival analysis tool: Cox Regression model. The Cox regression was best suited for this study due to the fact that it is suitable for time-to-event outcomes. In this case, how much longer does a patient live if given a heart transplant versus those who do not receive the transplant. In some cases patients post transplant lived an extra 1-4 years. The best model used to support the data and build the images was Model 3. Future research could look into which age group had best survivability post transplant. This could provide healthcare workers valuable information regarding who should get the heart transplant if there are patients in different age groups who are waiting for a new heart and which would benefit the most and survive. As we know donated organs are not easy to come by and making sure that an organ such as a heart should go to the best candidate that would live longer with that new heart. In addition, this analysis would be interesting to see with more current data and a larger sample size, with more covariates. For instance, perhaps look into race and sex and how that affects survivability. Researchers could also compare the results across different surgery centers, could there be any statistical significance between having surgery performed at one hospital vs another. In summary, our findings contribute to a deeper understanding of the complex interplay between heart transplantation, age and patient outcomes in the realm of cardiac healthcare.</p>
+</section>
+<section id="references" class="slide level2 smaller">
+<h2>References</h2>
+<p>[1] B. W. Turnbull, B. Wm. Brown Jr., and M. Hu, “Heart transplant data,” Data Sets, https://www.openintro.org/data/index.php?data=heart_transplant (accessed Nov.&nbsp;22, 2023).</p>
+<p>[2] P. Schober and T. R. Vetter, “Survival analysis and interpretation of time-to-event data: The Tortoise and the hare,” Anesthesia and analgesia, <a href="https://pubmed.ncbi.nlm.nih.gov/30015653/#:~:text=Survival%20analysis%2C%20or%20more%20generally,defined%20end%20point%20of%20interest" class="uri">https://pubmed.ncbi.nlm.nih.gov/30015653/#:~:text=Survival%20analysis%2C%20or%20more%20generally,defined%20end%20point%20of%20interest</a>.&nbsp; (accessed Oct.&nbsp;7, 2023).&nbsp;</p>
+<p>[3] &nbsp;D. Kumar and B. Klefsjö, “Proportional hazards model: A Review,” Reliability Engineering &amp; System Safety, <a href="https://www.sciencedirect.com/science/article/abs/pii/0951832094900108" class="uri">https://www.sciencedirect.com/science/article/abs/pii/0951832094900108</a>&nbsp; (accessed Oct.&nbsp;7, 2023).</p>
 <div class="footer footer-default">
 
 </div>
