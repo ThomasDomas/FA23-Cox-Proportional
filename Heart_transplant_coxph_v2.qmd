@@ -1,8 +1,4 @@
----
-title: "Appendix - full code with additional commentary"
-format: html
-editor: visual
----
+# Appendix - full code and commentary {.unnumbered}
 
 ## Load libraries and data set, examine and transform data as needed. {.unnumbered}
 
@@ -10,7 +6,7 @@ Load the needed libraries (survivival, survminer) and import the heart transplan
 
 ```{r}
 #| output: false
-#load neaded libraries
+#load needed libraries
 library(survival)
 #install.packages("survminer")
 library(survminer)
