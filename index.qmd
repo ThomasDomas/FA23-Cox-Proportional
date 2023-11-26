@@ -1,3 +1,5 @@
 # Cox Proportional Hazards Model {.unnumbered}
 
 Review of the model and an example of its use to analyze data on survival of patients who receive heart transplant vs those who are candidates for the treatment but do not receive it.
+
+See accompanying slides [here](https://thomasdomas.github.io/FA23-Cox-Proportional-Slides/docs.html#/title-slide)
