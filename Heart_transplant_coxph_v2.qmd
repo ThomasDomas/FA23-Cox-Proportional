@@ -1,10 +1,10 @@
 ---
-title: "Heart_transplant_coxph_v2"
+title: "Appendix - full code with additional commentary"
 format: html
 editor: visual
 ---
 
-## Load libraries and data set, examine and transform data as needed.
+## Load libraries and data set, examine and transform data as needed. {.unnumbered}
 
 Load the needed libraries (survivival, survminer) and import the heart transplant dataset
 
